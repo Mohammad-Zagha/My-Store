@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+   body {
+      overflow-anchor: none;
+      @apply text-primary-dark bg-background-light;
+   }
+
+   a {
+      @apply block;
+   }
+
+   button {
+      @apply shrink-0 transition-all *:active:scale-95 flex *:transition-all;
+   }
+
+   h1 {
+      @apply text-4xl;
+   }
+
+   h2 {
+      @apply text-3xl;
+   }
+
+   h3 {
+      @apply text-2xl;
+   }
+
+   h4 {
+      @apply text-xl;
+   }
+
+   h5 {
+      @apply text-lg;
+   }
+
+   h6 {
+      @apply text-base;
+   }
+
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+      @apply font-bold;
+   }
+
+   @font-face {
+      font-family: 'SFPro';
+      src: url('/fonts/alfont_com_SFProAR_semibold.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+   }
+   @font-face {
+      font-family: 'Cairo';
+      src: url('/fonts/Cairo-VariableFont_slnt,wght.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+   }
+   @font-face {
+      font-family: 'Ubuntu';
+      src: url('/fonts/Ubuntu-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+   }
+   /* style scrollbar */
+   ::-webkit-scrollbar {
+      @apply size-1.5 rounded-xl;
+   }
+   ::-webkit-scrollbar-track {
+      @apply bg-gray-200/70 rounded-xl;
+   }
+
+   /* no-scrollbar */
+   .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+   }
+
+   .no-scrollbar::-webkit-scrollbar {
+      display: none;
+   }
+}
+
+@layer utilities {
+   .center {
+      @apply flex justify-center items-center;
+   }
+   .circle {
+      @apply rounded-full;
+   }
+   .square {
+      @apply rounded-lg;
+   }
+   .center-y {
+      @apply top-1/2 -translate-y-1/2;
+   }
+   .center-x {
+      @apply left-1/2 -translate-x-1/2;
+   }
+   .pointer {
+      @apply cursor-pointer;
+   }
+}
+
+blockquote.side-quote {
+   @apply -indent-[2.3rem] lg:text-[2rem] font-700 leading-[2.7rem] m-2r mb-0 text-pretty;
+   &::before,
+   &::after {
+      content: open-quote;
+      @apply text-white leading-[0rem] text-[5rem] font-700;
+   }
+   &::after {
+      content: close-quote;
+      vertical-align: bottom;
+      padding-inline: 0.5rem;
+   }
+}
+@supports (hanging-punctuation: first) {
+   blockquote {
+      text-indent: 0;
+      hanging-punctuation: first;
+   }
+}
+
+/* loop */
+
+.slider-container {
+   .swiper-slide img {
+      width: 100%;
+      object-fit: cover;
+   }
+
+   .slider-controler {
+      position: relative;
+      bottom: 0rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      div {
+         cursor: pointer;
+         border: 1px solid transparent;
+         border-radius: 50%;
+         padding: 2.5px 10px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         transition: 0.3s ease;
+
+         &:hover {
+            border: 1px solid currentColor;
+            transition: 0.3s ease;
+         }
+      }
+   }
+}
