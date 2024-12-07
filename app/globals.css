@@ -160,3 +160,9 @@ blockquote.side-quote {
       }
    }
 }
+
+@layer components {
+   .custom-tab-button {
+      @apply transition-all z-10 grow shrink-0 min-w-0 whitespace-nowrap relative inline-flex items-center justify-center gap-2 border-r border-gray-200 last:border-r-0 text-sm font-500 sm:font-600 lg:text-base md:font-700 h-10 md:h-11 px-6 py-1 sm:py-1.5 md:py-2 text-primary-light hover:text-primary-dark hover:bg-success/5 data-[active=true]:bg-success/10 data-[active=true]:text-success;
+   }
+}

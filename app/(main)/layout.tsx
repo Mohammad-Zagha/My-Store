@@ -1,12 +1,11 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import './globals.css'
+import '../globals.css'
 import Navbar from '@/components/common/Navbar'
 import gsap from 'gsap'
 import Footer from '@/components/ui/Footer'
 import { Toaster } from 'sonner'
 import CacheProvider from '@/lib/Cache'
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
 export default function RootLayout({
    children,
 }: Readonly<{
@@ -24,7 +23,10 @@ export default function RootLayout({
    }, [])
    return (
       <html lang="en">
-         <body className={`antialiased bg-primary-dark relative opacity-0 overscroll-none `} ref={contentRef}>
+         <body
+            className={`antialiased bg-primary-dark relative opacity-0 overscroll-none w-dvw overflow-x-clip   `}
+            ref={contentRef}
+         >
             <CacheProvider>
                <div className="fixed top-0 right-0 col-span-full w-full h-fit   z-[999] ">
                   <Navbar />

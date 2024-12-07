@@ -1,7 +1,8 @@
 'use client'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/Taps'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Taps'
 import useParamsValues from '@/hooks/use-params'
 import React from 'react'
+import Orders from './Orders'
 
 const AdminTaps = () => {
    const { value: activeTab, setValue: setActiveTab } = useParamsValues({
@@ -9,10 +10,19 @@ const AdminTaps = () => {
       defaultValue: 'orders',
    })
    return (
-      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} className="overflow-y-auto rounded-2xl gap-0">
+      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} className="overflow-y-auto gap-0 w-dvw h-dvh">
          <TabsList>
-            <TabsTrigger value="orders">Orders</TabsTrigger>
+            <TabsTrigger value="products">المنتجات</TabsTrigger>
+            <TabsTrigger value="offers">العروض</TabsTrigger>
+            <TabsTrigger value="categories">التصنيفات</TabsTrigger>
+            <TabsTrigger value="orders">الطلبات</TabsTrigger>
          </TabsList>
+
+         <div className="overflow-y-auto">
+            <TabsContent value="orders">
+               <Orders />
+            </TabsContent>
+         </div>
       </Tabs>
    )
 }
