@@ -1,4 +1,4 @@
-import { orderSchema } from "@/lib/zod/Schemas";
+import { AdminAuthSchema, orderSchema } from "@/lib/zod/Schemas";
 import * as z from 'zod'
 export type T_Category = {
 
@@ -46,7 +46,7 @@ export type T_Cart ={
     }[]
 }
 export type T_Order = z.infer<typeof orderSchema>
-
+export type T_Admin_Auth = z.infer<typeof AdminAuthSchema>
 
 
 

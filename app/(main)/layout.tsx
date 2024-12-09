@@ -22,30 +22,16 @@ export default function RootLayout({
       )
    }, [])
    return (
-      <html lang="en">
-         <body
-            className={`antialiased bg-primary-dark relative opacity-0 overscroll-none w-dvw overflow-x-clip   `}
-            ref={contentRef}
-         >
-            <CacheProvider>
-               <div className="fixed top-0 right-0 col-span-full w-full h-fit   z-[999] ">
-                  <Navbar />
-               </div>
-               {children}
-               <Toaster
-                  position={'bottom-right'}
-                  richColors
-                  visibleToasts={6}
-                  closeButton
-                  expand
-                  toastOptions={{
-                     closeButton: true,
-                  }}
-                  duration={3000}
-               />
-               <Footer />
-            </CacheProvider>
-         </body>
-      </html>
+      <div
+         className={`antialiased bg-primary-dark relative opacity-0 overscroll-none w-dvw overflow-x-clip   `}
+         ref={contentRef}
+      >
+         <div className="fixed top-0 right-0 col-span-full w-full h-fit   z-[999] ">
+            <Navbar />
+         </div>
+         {children}
+
+         <Footer />
+      </div>
    )
 }

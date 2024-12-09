@@ -44,7 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                <button
                   type="button"
                   onClick={() => setShow((prev) => !prev)}
-                  className="absolute center-y right-1r pointer text-muted-foreground"
+                  className="absolute center-y left-1r pointer text-muted-foreground"
                >
                   {show ? <FaRegEye size={16} /> : <FaEyeSlash size={16} />}
                </button>

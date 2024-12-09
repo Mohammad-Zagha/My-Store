@@ -48,7 +48,13 @@ const BestSellingCarousel = () => {
    }, [inView])
 
    const cards = products?.results?.map((product, i) => (
-      <ProductContainer key={i} src={product.images[0].url} title={product.name} price={product.price.toString()} />
+      <ProductContainer
+         key={i}
+         src={product.images[0].url}
+         title={product.name}
+         price={product.price}
+         productid={product.id}
+      />
    ))
    return (
       <div ref={containerRef} className="w-full space-y-0.25r mt-[100px]">

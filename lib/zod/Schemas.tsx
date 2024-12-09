@@ -13,3 +13,8 @@ export const orderSchema = z.object({
    lastName: z.string({ message: 'الاسم الاخير مطلوب' }).min(2, 'الاسم الاخير يجب ان يحتوي على حرفين على الاقل'),
    phone: phone_number_schema,
 })
+
+export const AdminAuthSchema = z.object({
+   email: z.string().email({ message: 'البريد الالكتروني مطلوب' }),
+   password: z.string().min(1, 'كلمة المرور مطلوبة'),
+})

@@ -6,11 +6,9 @@ interface Props {
 
 const AdminLayout: FC<Props> = ({ children }) => {
    return (
-      <html lang="en">
-         <body className="h-dvh w-full bg-background-dark grid grid-cols-1">
-            <div className="  w-full center">{children}</div>
-         </body>
-      </html>
+      <div className="h-dvh w-full bg-background-dark grid grid-cols-1">
+         <div className="w-full center">{children}</div>
+      </div>
    )
 }
 
