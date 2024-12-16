@@ -82,7 +82,7 @@ const Page = () => {
                      .map((_, index) => <ProductCardSkeleton key={index} />)
                ) : products.length > 0 ? (
                   products.map((product) => (
-                     <motion.div key={product.id} variants={cardAnimation} className="min-h-[400px] flex">
+                     <motion.div key={product.productId} variants={cardAnimation} className="min-h-[400px] flex">
                         <ProductCard product={product} />
                      </motion.div>
                   ))

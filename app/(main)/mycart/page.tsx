@@ -14,7 +14,9 @@ const Page = () => {
 
    useEffect(() => {
       if (cart) {
-         const total = cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)
+         const total = cart.items
+            .reduce((acc, item) => acc + (item.price - item.discount) * item.quantity, 0)
+            .toFixed(2)
          setTotal(Number(total))
       }
    }, [cart])
@@ -34,7 +36,7 @@ const Page = () => {
             {/* Cart Items */}
             <div
                className={cn(
-                  'flex-1 max-h-[350px] min-h-[350px] px-2  overflow-y-auto',
+                  'flex-1 max-h-[350px] min-h-[350px] px-2  overflow-y-auto gap-2 flex flex-col',
                   cart && cart.items.length > 0 ? '' : 'flex center w-full',
                )}
             >

@@ -2,7 +2,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Taps'
 import useParamsValues from '@/hooks/use-params'
 import React from 'react'
-import Orders from './Orders'
+import Orders from './taps/Orders'
+import Categories from './taps/Categories'
 
 const AdminTaps = () => {
    const { value: activeTab, setValue: setActiveTab } = useParamsValues({
@@ -19,8 +20,11 @@ const AdminTaps = () => {
          </TabsList>
 
          <div className="overflow-y-auto">
-            <TabsContent value="orders">
+            <TabsContent value="orders" className="h-full ">
                <Orders />
+            </TabsContent>
+            <TabsContent value="categories" className="h-full ">
+               <Categories />
             </TabsContent>
          </div>
       </Tabs>

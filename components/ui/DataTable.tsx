@@ -70,7 +70,7 @@ const DataTable = <T,>({
    }
 
    return (
-      <Table className="w-full overflow-y-auto">
+      <Table className="w-full overflow-y-auto" dir="rtl">
          <TableHeader className={cn('bg-gray-100', headerClassName)}>
             {table.getHeaderGroups().map((headerGroup) => (
                <TableRow key={headerGroup.id}>
@@ -137,14 +137,14 @@ const DataTable = <T,>({
                         {renderAccordionContent && (
                            <TableCell
                               key={'accordion' + index}
-                              className={cn('shrink-0 cursor-pointer h-full', cellClassName)}
+                              className={cn('shrink-0 cursor-pointer  h-full', cellClassName)}
                               onClick={() => toggleRowExpansion(index)}
                            >
-                              <div className="size-full center">
+                              <div className="size-full center ">
                                  <ChevronDown
                                     className={cn(
                                        'transition-transform',
-                                       expandedRows[index] ? 'rotate-180 text-main' : 'text-muted-foreground',
+                                       expandedRows[index] ? 'rotate-180 text-primary-dark' : 'text-primary-light',
                                     )}
                                  />
                               </div>
@@ -163,7 +163,7 @@ const DataTable = <T,>({
                      {/* Expanded Row with Framer Motion */}
                      {expandedRows[index] && renderAccordionContent && (
                         <TableRow>
-                           <TableCell className="p-0" colSpan={columns.length + 1}>
+                           <TableCell className="p-0" colSpan={columns.length + 2}>
                               {renderAccordionContent(row.original)}
                            </TableCell>
                         </TableRow>

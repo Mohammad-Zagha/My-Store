@@ -22,6 +22,8 @@ const OrderForm = ({ disabled = true }: { disabled: boolean }) => {
          {
             name: data.firstName + ' ' + data.lastName,
             phone: data.phone,
+            city: data.city,
+            address: data.address,
          },
          {
             onSuccess: () => {

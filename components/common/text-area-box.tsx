@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
 import { cn } from '@/lib/utils'
-import { InputLabel } from '../ui/input'
+import { InputLabel, Instruction } from '../ui/input'
 import { Textarea } from '../chadcn/textarea'
 import { TextAreaBoxProps } from '@/types/objects'
 
@@ -18,6 +18,7 @@ const TextAreaBox = forwardRef<HTMLTextAreaElement, TextAreaBoxProps>(
                </InputLabel>
             )}
             <Textarea ref={ref} placeholder={placeholder} rows={4} {...props} />
+            {instructions && <Instruction {...instructions} className="text-[8px] font-Cairo font-semibold" />}
          </div>
       )
    },

@@ -11,5 +11,4 @@ function createAxiosInstance({ withAuth }: { withAuth: boolean } = { withAuth: f
 }
 
 const axiosInstance = createAxiosInstance({ withAuth: false })
-
 export { axiosInstance }

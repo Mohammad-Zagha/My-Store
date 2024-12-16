@@ -31,12 +31,14 @@ type T_Add_To_Cart_Response = {
       }[]
    }
 }
+
 export function useAddToCart() {
    const queryClient = useQueryClient()
    return useMutation({
       mutationFn: async ({ product, quantity = 1 }: { product: T_Product; quantity: number }) => {
+         console.log(product)
          const { data } = await axiosInstance.post<T_Add_To_Cart_Response>('/cart/add-to-cart/', {
-            productId: product.id,
+            productId: product.productId,
             quantity,
          })
          return data
@@ -52,7 +54,7 @@ export function useAddToCart() {
                items: [
                   ...previousCart.items,
                   {
-                     productId: product.id,
+                     productId: product.productId,
                      quantity,
                      name: product.name,
                      price: product.price,
@@ -280,10 +282,9 @@ export function useBatchDecreaseQuantity() {
 }
 
 type T_Cart_Checkout = {
-   // city:string,
-   // address:string,
+   city: string
+   address: string
    name: string
-   // lastName:string,
    phone: string
 }
 export function useCheckoutMutation() {

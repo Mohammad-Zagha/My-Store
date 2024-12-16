@@ -18,3 +18,9 @@ export const AdminAuthSchema = z.object({
    email: z.string().email({ message: 'البريد الالكتروني مطلوب' }),
    password: z.string().min(1, 'كلمة المرور مطلوبة'),
 })
+
+export const CategorySchema = z.object({
+   name: z.string().min(2, 'اسم القسم يجب ان يحتوي على حرفين على الاقل'),
+   description: z.string().min(2, 'وصف القسم يجب ان يحتوي على حرفين على الاقل'),
+   image: z.string().optional().or(z.instanceof(File)),
+})

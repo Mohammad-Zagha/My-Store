@@ -66,7 +66,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, React.ThHTMLAttributes<
       <th
          ref={ref}
          className={cn(
-            'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 first:rounded-bl-2xl last:rounded-br-2xl first:rounded-tl-2xl last:rounded-tr-2xl min-w-fit whitespace-nowrap', // Rounds the left and right corners of the header
+            'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 first:rounded-br-2xl last:rounded-bl-2xl first:rounded-tr-2xl last:rounded-tl-2xl min-w-fit whitespace-nowrap', // Rounds the left and right corners of the header
             className,
          )}
          {...props}
@@ -80,7 +80,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, React.TdHTMLAttributes<
       <td
          ref={ref}
          className={cn(
-            'p-2 align-middle [&:has([role=checkbox])]:pr-0 first:rounded-bl-2xl last:rounded-br-2xl first:rounded-tl-2xl last:rounded-tr-2xl min-w-fit', // Rounds the bottom corners of the cells in the last row
+            'p-2 align-middle [&:has([role=checkbox])]:pr-0   min-w-fit', // Rounds the bottom corners of the cells in the last row
             className,
          )}
          {...props}

@@ -90,7 +90,7 @@ const config: Config = {
           '10r': '10rem', // 160px
        },
        boxShadow: {
-          card: '0 1px 10px 0 rgba(0, 0, 0, 0.1) !important',
+         card: ' rgba(149, 157, 165, 0.2) 0px 0px 5px !important',
        },
        keyframes: {
           'accordion-down': {

@@ -30,7 +30,7 @@ export function Cart() {
 
             {/* Scrollable Cart Items Section */}
             {cart && cart.items.length > 0 ? (
-               <div className="flex-1 overflow-y-auto gap-2 flex flex-col px-4 ">
+               <div className="flex-1 overflow-y-auto gap-2 flex flex-col px-4 gap-4">
                   <AnimatePresence>
                      {cart?.items.map((item) => (
                         <motion.div
@@ -65,7 +65,9 @@ export function Cart() {
                <div className="flex justify-between items-center px-4 ">
                   <span className="text-lg font-semibold">المجموع:</span>
                   <span className="text-lg font-semibold">
-                     {cart?.items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
+                     {cart?.items
+                        .reduce((acc, item) => acc + (item.price - item.discount) * item.quantity, 0)
+                        .toFixed(2)}
                   </span>
                </div>
                <Link

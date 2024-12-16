@@ -87,7 +87,7 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
             />
          </Link>
          {product?.images[0] && (
-            <Link href={`/product/${product.id}`} className="w-full h-[220px]">
+            <Link href={`/product/${product.productId}`} className="w-full h-[220px]">
                <CustomAvatar
                   className="rounded-lg object-cover aspect-auto h-[220px] w-full hover:scale-105 transition-transform duration-300"
                   alt="product"
