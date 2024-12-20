@@ -52,24 +52,26 @@ const FilePreview: React.FC<{
    </div>
 )
 
-const ImagePreview: React.FC<{ file: File | string | null; fileType: string }> = ({ file, fileType }) =>
-   file !== null &&
-   fileType === 'image' &&
-   ((file instanceof File && isImage(file)) || typeof file === 'string') && (
-      <div className="p-3">
-         <div className="rounded-lg overflow-hidden h-[15rem] center">
-            <Image
-               loading="lazy"
-               src={getImageSrc(file)!}
-               {...(file instanceof File ? { onLoad: () => URL.revokeObjectURL(URL.createObjectURL(file)) } : {})}
-               alt={getFileName(file, fileType)}
-               width={300}
-               height={300}
-               className="object-contain h-full !max-h-full w-auto rounded-lg shadow"
-            />
+const ImagePreview = React.memo<{ file: File | string | null; fileType: string }>(
+   ({ file, fileType }) =>
+      file !== null &&
+      fileType === 'image' &&
+      ((file instanceof File && isImage(file)) || typeof file === 'string') && (
+         <div className="p-3">
+            <div className="rounded-lg overflow-hidden h-[15rem] center">
+               <Image
+                  loading="lazy"
+                  src={getImageSrc(file)!}
+                  {...(file instanceof File ? { onLoad: () => URL.revokeObjectURL(URL.createObjectURL(file)) } : {})}
+                  alt={getFileName(file, fileType)}
+                  width={300}
+                  height={300}
+                  className="object-contain h-full !max-h-full w-auto rounded-lg shadow"
+               />
+            </div>
          </div>
-      </div>
-   )
+      ),
+)
 
 const DragAndDrop: React.FC<TDnd> = React.forwardRef<HTMLInputElement, TDnd>(
    ({ className, file, setFile, fileType = 'attachment' }, ref) => {

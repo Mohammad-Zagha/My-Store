@@ -46,7 +46,7 @@ const AdminLoginForm = () => {
                type: 'error',
             }}
          />
-         <Button className="w-1/2 mx-auto" type="submit">
+         <Button className="w-1/2 mx-auto" type="submit" isLoading={loginMutaion.isPending}>
             تسجيل الدخول
          </Button>
       </form>

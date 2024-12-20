@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/lib/Axios'
-import { hasFileKey } from '@/lib/utils'
-import { objectToFormData, T_Category, T_General_Response, T_Paginated_Response } from '@/types/objects'
+import { hasFileKey, objectToFormData } from '@/lib/utils'
+import { T_Category, T_General_Response, T_Paginated_Response } from '@/types/objects'
 import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 export function useGetHomeCategories({ page = 1, limit = 5 }: { page: number; limit: number }) {
@@ -35,15 +35,17 @@ export function useUpdateCategory() {
          try {
             const hasFile = hasFileKey(values, 'image')
             const body = hasFile ? objectToFormData(values) : values
-            const config =
-               values instanceof FormData
-                  ? {
-                       headers: {
-                          'Content-Type': hasFile ? 'multipart/form-data' : 'application/json',
-                       },
-                    }
-                  : {}
-            const { data } = await axiosInstance.patch<T_General_Response>(`/categories/${id}`, body, config)
+
+            const { data } = await axiosInstance.patch<T_General_Response>(
+               `/categories/${id}`,
+               body,
+
+               {
+                  headers: {
+                     'Content-Type': hasFile ? 'multipart/form-data' : 'application/json',
+                  },
+               },
+            )
             return data
          } catch (error) {
             console.log(error)

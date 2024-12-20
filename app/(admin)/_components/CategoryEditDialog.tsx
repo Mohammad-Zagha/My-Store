@@ -6,6 +6,7 @@ import TextAreaBox from '@/components/common/text-area-box'
 import { DragAndDropImage } from '@/components/ui/DND'
 import { InputBox } from '@/components/ui/input'
 import { useUpdateCategory } from '@/hooks/api/Categories'
+import { objectToFormData } from '@/lib/utils'
 import { CategorySchema } from '@/lib/zod/Schemas'
 import { T_Category, T_Category_Inputs } from '@/types/objects'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -25,12 +26,13 @@ const CategoryEditDialog = ({ category }: { category: T_Category }) => {
       setValue('description', category.description)
    }, [])
    const onSubmit: SubmitHandler<T_Category_Inputs> = (data) => {
-      console.log(data)
       updateMutation.mutateAsync(
          {
             id: category.id,
             values: {
-               ...data,
+               name: data.name,
+               image: data.image,
+               description: data.description,
             },
          },
          {

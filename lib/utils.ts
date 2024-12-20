@@ -33,3 +33,38 @@ export function hasFileKey<T extends Record<string, any>, K extends keyof T>(obj
 export function isImage(file: File): boolean {
   return file.type.startsWith('image/')
 }
+
+export function objectToFormData(
+  obj: Record<string, any>,
+  formData: FormData = new FormData(),
+  namespace?: string,
+): FormData {
+  for (const property in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, property)) {
+      const formKey = namespace ? `${namespace}[${property}]` : property; // Nested keys use bracket notation
+      const value = obj[property];
+
+      // Handle arrays
+      if (Array.isArray(value)) {
+        value.forEach((item, index) => {
+          const indexedKey = `${formKey}[${index}]`; // Array keys: field[0], field[1], etc.
+          if (typeof item === "object" && item !== null && !(item instanceof File)) {
+            objectToFormData(item, formData, indexedKey);
+          } else {
+            formData.append(indexedKey, item);
+          }
+        });
+      }
+      // Handle objects
+      else if (typeof value === "object" && value !== null && !(value instanceof File)) {
+        objectToFormData(value, formData, formKey);
+      }
+      // Handle primitive values and File objects
+      else if (value !== null && value !== undefined) {
+        formData.append(formKey, value);
+      }
+    }
+  }
+
+  return formData;
+}

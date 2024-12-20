@@ -22,5 +22,19 @@ export const AdminAuthSchema = z.object({
 export const CategorySchema = z.object({
    name: z.string().min(2, 'اسم القسم يجب ان يحتوي على حرفين على الاقل'),
    description: z.string().min(2, 'وصف القسم يجب ان يحتوي على حرفين على الاقل'),
-   image: z.string().optional().or(z.instanceof(File)),
+   image: z.string().or(z.instanceof(File)).optional(),
+})
+
+export const ProductSchema = z.object({
+   name: z.string().min(2, 'اسم المنتج يجب ان يحتوي على حرفين على الاقل'),
+   description: z.string().min(2, 'وصف المنتج يجب ان يحتوي على حرفين على الاقل'),
+   price: z.number().min(1, 'السعر يجب ان يكون على الاقل'),
+   stock: z.number().min(1, 'الكمية يجب ان تكون على الاقل'),
+   discount: z.number().optional().default(0),
+   category: z.string().min(2, 'القسم يجب ان يحتوي على حرفين على الاقل'),
+   images: z.array(
+      z.object({
+         url: z.string().or(z.instanceof(File)).optional(),
+      }),
+   ),
 })

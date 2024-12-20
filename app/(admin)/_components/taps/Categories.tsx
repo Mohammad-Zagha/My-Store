@@ -66,7 +66,7 @@ function CategoryCard({ category }: { category: T_Category }) {
          <div className="size-20 z-[10] shadow-md rounded-full bg-background-light flex center gap-2 absolute top-[50%] right-[50%] translate-x-[50%] translate-y-[-50%]">
             <span className="text-lg font-Cairo font-semibold text-primary-dark">44</span>
          </div>
-         <CustomAvatar src={category.image} alt={category.name} className="w-full !rounded-lg h-[200px] " />
+         <CustomAvatar src={category.image as string} alt={category.name} className="w-full !rounded-lg h-[200px] " />
          <div className="w-full h-full p-2 mt-10 flex flex-col gap-2">
             <span className="font-Cairo text-sm font-semibold text-primary-dark">{category.name}</span>
             <span className="font-Cairo text-xs text-primary-dark/70 line-clamp-2   ">

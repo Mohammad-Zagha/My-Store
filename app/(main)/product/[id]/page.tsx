@@ -22,17 +22,18 @@ const Page = () => {
    const productId = Array.isArray(id) ? id[0] : id
    const addToCardMutaion = useAddToCart()
    const {
-      data: products,
+      data: productsPagenated,
       isLoading: isProductLoading,
       error: productsError,
    } = useGetAllProducts({ page: 1, limit: 10 })
    const { data, isLoading, error } = useGetProduct(productId)
-   const [image, setImage] = React.useState<string | undefined>(data?.images[0].url)
+   const [image, setImage] = React.useState<string | undefined>(data?.images[0].url as string)
    const [count, setCount] = React.useState(1)
+   const products = productsPagenated?.pages.flatMap((page) => page?.results ?? []) || []
 
    useEffect(() => {
       if (data) {
-         setImage(data.images[0].url)
+         setImage(data.images[0].url as string)
       }
    }, [data])
 
@@ -155,8 +156,8 @@ const Page = () => {
                         data.images.map((image, index) => (
                            <CustomAvatar
                               key={index}
-                              src={image.url}
-                              onClick={() => setImage(image.url)}
+                              src={image.url as string}
+                              onClick={() => setImage(image.url as string)}
                               alt={'img'}
                               className="h-20 w-20 rounded-lg object-cover hover:scale-105 transition-transform duration-300 pointer"
                            />
@@ -190,8 +191,8 @@ const Page = () => {
                   Array(3)
                      .fill(0)
                      .map((_, index) => <ProductCardSkeleton key={index} />)
-               ) : products && products.results.length > 0 ? (
-                  products.results.map((product) => (
+               ) : products && products.length > 0 ? (
+                  products.map((product) => (
                      <motion.div key={product.productId} className="min-h-[400px] flex">
                         <ProductCard product={product} />
                      </motion.div>

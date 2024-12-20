@@ -12,7 +12,8 @@ import { ProductCardSkeleton } from '@/components/ui/Skeletons'
 const TodaysOffers = () => {
    const containerRef = useRef<HTMLDivElement>(null)
    const inView = useInView(containerRef, { once: true })
-   const { data: products, isLoading } = useGetAllProducts({ page: 1, limit: 10 })
+   const { data, isLoading } = useGetAllProducts({ page: 1, limit: 10 })
+   const products = data?.pages.flatMap((page) => page?.results ?? []) || []
 
    useEffect(() => {
       if (inView) {
@@ -66,7 +67,7 @@ const TodaysOffers = () => {
                   <ProductCardSkeleton />
                </>
             ) : (
-               products?.results?.map((product) => <ProductCard key={product.id} product={product} />)
+               products?.map((product) => <ProductCard key={product.productId} product={product} />)
             )}
          </div>
       </>

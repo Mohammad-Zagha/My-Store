@@ -6,14 +6,18 @@ import { useGetHomeCategories } from '@/hooks/api/Categories'
 import ImageContainer from '../common/ImageContainer'
 
 export function HeroCarousel() {
-   const { data: categories, isLoading } = useGetHomeCategories()
-   const cards = categories?.results?.map((category) => {
+   const { data: categories, isLoading } = useGetHomeCategories({
+      page: 1,
+      limit: 5,
+   })
+   const cards = categories?.pages?.flatMap((page) => page?.results ?? [])
+   const images = cards?.map((category) => {
       return (
          <ImageContainer
             key={category.id}
             href={`/categories/products/${category.id}`}
             title={category.name}
-            src={category.image}
+            src={category.image as string}
             description={category.description}
          />
       )
@@ -27,40 +31,7 @@ export function HeroCarousel() {
             <AnimatedLink href="/" title="مشاهدة الكل" />
          </div>
 
-         {<Carousel items={cards!} isLoading={isLoading} />}
+         {<Carousel items={images!} isLoading={isLoading} />}
       </div>
    )
 }
-
-const data = [
-   {
-      href: '/',
-      title: 'عطور ستاتي',
-      src: '/perfums/image-1.png',
-      description: 'عطر فاكهي حلو يتكون من الاناناس ، الياسمين المغربي ، أخشاب البتولا ، الحمضيات.',
-   },
-   {
-      href: '/',
-      title: 'عطور رجالي',
-      description: '  عطر خشبي حار يتكون من الفلفل الوردي ، الباتشولي ، العنبر ، الفانيليا.',
-      src: '/perfums/image-2.png',
-   },
-   {
-      href: '/',
-      title: 'عطور 100 مل',
-      description: ' عطر زهري خشبي يتكون من الورد ، الياسمين ، الباتشولي ، العنبر.',
-      src: '/perfums/image-3.png',
-   },
-   {
-      href: '/',
-      title: 'عطور اطفال',
-      description: ' عطر زهري خشبي يتكون من الورد ، الياسمين ، الباتشولي ، العنبر.',
-      src: '/perfums/image-4.png',
-   },
-   {
-      href: '/',
-      title: 'عطور 50 مل',
-      description: ' عطر زهري خشبي يتكون من الورد ، الياسمين ، الباتشولي ، العنبر.',
-      src: '/perfums/image-5.png',
-   },
-]

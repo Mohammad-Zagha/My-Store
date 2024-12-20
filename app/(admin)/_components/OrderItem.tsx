@@ -23,12 +23,12 @@ const OrderItem = ({ item }: { item: T_Product & { quantity: number } }) => {
             <span
                className={cn(
                   'font-Cairo text-lg text-primary-dark leading-none',
-                  discountAmount > 0 ? 'text-gray-400 line-through' : '',
+                  discountAmount !== item.price ? 'text-gray-400 line-through' : '',
                )}
             >
                ₪ {(item.price * item.quantity).toFixed(2)}
             </span>
-            {discountAmount > 0 && (
+            {discountAmount !== item.price && (
                <span className="font-Cairo text-lg text-primary-dark leading-none">
                   ₪ {((item.price - item.discount) * item.quantity).toFixed(2)}
                </span>

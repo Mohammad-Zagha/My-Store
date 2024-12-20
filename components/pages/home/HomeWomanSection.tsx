@@ -5,7 +5,9 @@ import { useGetAllProducts } from '@/hooks/api/Products'
 import { ProductCardSkeleton } from '@/components/ui/Skeletons'
 import ProductCard from '@/components/common/ProductCard'
 const HomeWomanSection = () => {
-   const { data: products, isLoading } = useGetAllProducts({ page: 1, limit: 10 })
+   const { data, isLoading } = useGetAllProducts({ page: 1, limit: 10 })
+   const products = data?.pages.flatMap((page) => page?.results ?? []) || []
+
    return (
       <>
          <div className="col-span-3 max-md:hidden rounded-xl relative w-full h-full overflow-hidden">
@@ -33,7 +35,7 @@ const HomeWomanSection = () => {
                   <ProductCardSkeleton />
                </>
             ) : (
-               products?.results?.map((product) => <ProductCard key={product.id} product={product} />)
+               products?.map((product) => <ProductCard key={product.productId} product={product} />)
             )}
          </div>
       </>
