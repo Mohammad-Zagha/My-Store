@@ -49,7 +49,7 @@ const Products = () => {
             </>
          )}
          {products.map((product, index) => (
-            <AdminProductCard key={index} product={product} />
+            <AdminProductCard key={product.productId} product={product} />
          ))}
          <div ref={loadMoreRef} className="h-[400px] col-span-full flex justify-center items-center">
             {isFetchingNextPage && <ProductCardSkeleton />}
@@ -69,7 +69,7 @@ function AdminProductCard({ product }: { product: T_Product }) {
       >
          <div className="w-full flex gap-2 items-center border-b pb-2 ">
             <CustomAvatar
-               src={(product.images[0].url as string) ?? ''}
+               src={(product.images[0]?.url as string) ?? ''}
                alt={product.name}
                className="size-[70px] !rounded-lg  "
             />

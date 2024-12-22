@@ -1,6 +1,8 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {format} from 'date-fns'
+import { AxiosError } from "axios";
+import { toast } from "sonner";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }       
@@ -67,4 +69,57 @@ export function objectToFormData(
   }
 
   return formData;
+}
+
+export function isObject(value: any): value is object {
+  return typeof value === 'object' && !Array.isArray(value) && !(value instanceof Date) && !(value instanceof File)
+}
+function isValid(v: any) {
+  return v !== '' && v !== null && v !== undefined && !(typeof v === 'object' && v !== null && Object.keys(v).length === 0);
+}
+
+export function clean<T extends object>(val: T): T {
+  const data = Array.isArray(val) ? val.filter(isValid) : val
+  return Object.entries(data).reduce(
+     (acc: any, [key, value]) => {
+        if (isValid(value)) {
+           if (isObject(value)) {
+              acc[key] = clean(value)
+           } else if (Array.isArray(value)) {
+              acc[key] = value.map((i) => (isObject(i) || Array.isArray(i) ? clean(i) : i))
+           } else {
+              acc[key] = value
+           }
+        }
+        return acc
+     },
+     Array.isArray(val) ? [] : {},
+  )
+}
+
+
+export function handleError(error: unknown, message: string = 'حدث خطأ ما') {
+  if (error instanceof AxiosError) {
+     const e = error?.response?.data.errors as any
+     //check if error is array
+     if (Array.isArray(e)) {
+      e.forEach((err: any) => {
+        switch (err.type) {
+          case 'field':
+             toast.error(err.msg)
+             break
+          default:
+             toast.error(message)
+             break
+       }
+       })
+      
+     }else
+     {
+      console.log(error)
+     }
+   
+  } else {
+     toast.error(message)
+  }
 }

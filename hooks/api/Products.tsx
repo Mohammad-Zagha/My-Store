@@ -1,7 +1,8 @@
 import { axiosInstance } from '@/lib/Axios'
-import { hasFileKey, objectToFormData } from '@/lib/utils'
+import { handleError, hasFileKey, objectToFormData } from '@/lib/utils'
 import { T_Category, T_Paginated_Response, T_Product } from '@/types/objects'
 import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 export function useGetCategoryProducts({ page = 1, limit = 5, id }: { page: number; limit: number; id: string }) {
    return useInfiniteQuery({
@@ -84,8 +85,8 @@ export function useUpdateProduct() {
                },
             })
             return data
-         } catch (error) {
-            console.log(error)
+         } catch (error: any) {
+            handleError(error)
             throw error
          }
       },
@@ -97,7 +98,7 @@ export function useUpdateProduct() {
                ...oldData,
                pages: oldData.pages.map((page: T_Paginated_Response<T_Product>) => {
                   const updatedItems = page.results.map((item: T_Product) =>
-                     item.productId === updatedProduct.productId ? updatedProduct : item,
+                     item.productId === updatedProduct?.productId ? updatedProduct : item,
                   )
                   return { ...page, results: updatedItems }
                }),
@@ -110,17 +111,40 @@ export function useUpdateProduct() {
 
 export function useDeleteProduct() {
    const queryClient = useQueryClient()
+
    return useMutation({
       mutationFn: async (id: string) => {
-         try {
-            const { data } = await axiosInstance.delete(`/products/${id}`)
-            return data
-         } catch (error) {
-            console.log(error)
-         }
+         const { data } = await axiosInstance.delete(`/products/${id}`)
+         return data
       },
-      onSettled: () => {
-         queryClient.invalidateQueries({ queryKey: ['products'] })
+      onMutate: async (id: string) => {
+         await queryClient.cancelQueries({ queryKey: ['products'] })
+
+         const previousData = queryClient.getQueriesData({ queryKey: ['products'] })
+
+         queryClient.setQueriesData({ queryKey: ['products'] }, (oldData: any) => {
+            if (!oldData) return
+            return {
+               ...oldData,
+               pages: oldData.pages.map((page: T_Paginated_Response<T_Product>) => ({
+                  ...page,
+                  results: page.results.filter((item: T_Product) => item.productId !== id),
+               })),
+            }
+         })
+
+         // Return context with previous data for rollback
+         return { previousData }
+      },
+      onError: (err, id, context: any) => {
+         // Rollback to previous cache state
+         if (context?.previousData) {
+            queryClient.setQueriesData({ queryKey: ['products'] }, context.previousData)
+         }
+         console.error(err)
+      },
+      onSuccess: () => {
+         toast.success('تم حذف المنتج بنجاح')
       },
    })
 }

@@ -126,12 +126,14 @@ export const DragAndDropImage = React.forwardRef<HTMLInputElement, TDndImage>(
       const onDrop = useCallback(
          (acceptedFiles: File[]) => {
             if (acceptedFiles[0]) setFile(acceptedFiles[0])
-            else setFile(null)
          },
          [setFile],
       )
 
-      const removeFile = () => setFile(null)
+      const removeFile = (e: React.MouseEvent) => {
+         e.stopPropagation() // Prevent triggering the drag-and-drop input
+         setFile(null) // Propagate null to parent for removal
+      }
 
       const { getRootProps, getInputProps, isDragActive } = useDropzone({
          onDrop,
@@ -164,17 +166,14 @@ export const DragAndDropImage = React.forwardRef<HTMLInputElement, TDndImage>(
                      alt={getFileName(file, 'image')}
                      width={width || size}
                      height={height || size}
-                     className="object-cover w-full h-full" // Ensures the image fits within the container
+                     className="object-cover w-full h-full"
                   />
                ) : (
-                  <Upload className="size-7 text-muted-foreground " />
+                  <Upload className="size-7 text-muted-foreground" />
                )}
-               <div className="z-10 absolute bottom-2 center-x size-7 center circle pointer bg-primary-light/15">
-                  <Camera className="size-4 text-white" />
-               </div>
                {file && (
-                  <div className="z-40 absolute inset-1 opacity-0 pointer-events-none group-hover:opacity-100 transition-all group-hover:pointer-events-auto center circle">
-                     <Button variant={'destructive'} onClick={removeFile} size={'icon'} className="">
+                  <div className="z-50 absolute inset-1 opacity-0 pointer-events-none group-hover:opacity-100 transition-all group-hover:pointer-events-auto center circle">
+                     <Button variant={'destructive'} onClick={removeFile} size={'icon'}>
                         <Trash2 className="size-4" />
                      </Button>
                   </div>

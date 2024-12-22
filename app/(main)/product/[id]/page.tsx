@@ -27,13 +27,13 @@ const Page = () => {
       error: productsError,
    } = useGetAllProducts({ page: 1, limit: 10 })
    const { data, isLoading, error } = useGetProduct(productId)
-   const [image, setImage] = React.useState<string | undefined>(data?.images[0].url as string)
+   const [image, setImage] = React.useState<string | undefined>(data?.images[0]?.url as string)
    const [count, setCount] = React.useState(1)
    const products = productsPagenated?.pages.flatMap((page) => page?.results ?? []) || []
 
    useEffect(() => {
       if (data) {
-         setImage(data.images[0].url as string)
+         setImage(data.images[0]?.url as string)
       }
    }, [data])
 
@@ -156,8 +156,8 @@ const Page = () => {
                         data.images.map((image, index) => (
                            <CustomAvatar
                               key={index}
-                              src={image.url as string}
-                              onClick={() => setImage(image.url as string)}
+                              src={image?.url as string}
+                              onClick={() => setImage(image?.url as string)}
                               alt={'img'}
                               className="h-20 w-20 rounded-lg object-cover hover:scale-105 transition-transform duration-300 pointer"
                            />

@@ -5,6 +5,7 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
    Command,
+   CommandDialog,
    CommandEmpty,
    CommandGroup,
    CommandInput,
@@ -42,7 +43,7 @@ export function Combobox(props: ComboboxProps) {
    const [open, setOpen] = React.useState(false)
 
    return (
-      <div className="flex flex-col gap-[0.25rem]">
+      <div className="flex flex-col gap-[0.25rem] ">
          {label && (
             <InputLabel className={cn(labelClassName)} isRequired={isRequired}>
                {label}
@@ -105,13 +106,12 @@ export function EnumCombobox(props: EnumComboboxProps) {
       value,
       setValue,
       options,
-      placeholder = 'Select Options...',
+      placeholder = 'اختر الخيارات...',
       triggerClassName,
    } = props
    const [open, setOpen] = React.useState(false)
-
    return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 bg-white">
          {label && <InputLabel isRequired={isRequired}>{label}</InputLabel>}
          <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger
@@ -125,31 +125,29 @@ export function EnumCombobox(props: EnumComboboxProps) {
                {value ? options.find((item) => item.value === value)?.display : placeholder}
                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </PopoverTrigger>
-            <PopoverContent className="w-[--radix-popover-trigger-width] p-0 rounded-lg">
-               <Command className="rounded-[inherit]">
-                  <CommandInput placeholder={placeholder} />
-                  <CommandList>
-                     <CommandEmpty>No options found.</CommandEmpty>
-                     <CommandGroup>
-                        {options.map((item) => (
-                           <CommandItem
-                              key={item.value}
-                              value={item.value}
-                              onSelect={(currentValue) => {
-                                 setValue(currentValue === value ? '' : currentValue)
-                                 setOpen(false)
-                              }}
-                           >
-                              <Check
-                                 className={cn('me-2 h-4 w-4', value === item.value ? 'opacity-100' : 'opacity-0')}
-                              />
-                              {item.display}
-                           </CommandItem>
-                        ))}
-                     </CommandGroup>
-                  </CommandList>
-               </Command>
-            </PopoverContent>
+
+            <CommandDialog open={open} onOpenChange={setOpen}>
+               <CommandInput placeholder={placeholder} className="" dir="rtl" />
+               <CommandList className="min-h-[300px] bg-white ">
+                  <CommandEmpty>لا يوجد خيارات</CommandEmpty>
+                  <CommandGroup>
+                     {options.map((item) => (
+                        <CommandItem
+                           key={item.value}
+                           value={item.value}
+                           className="text-right hover:bg-gray-100"
+                           onSelect={(currentValue) => {
+                              setValue(currentValue === value ? '' : currentValue)
+                              setOpen(false)
+                           }}
+                        >
+                           <Check className={cn('me-2 h-4 w-4', value === item.value ? 'opacity-100' : 'opacity-0')} />
+                           {item.display}
+                        </CommandItem>
+                     ))}
+                  </CommandGroup>
+               </CommandList>
+            </CommandDialog>
          </Popover>
       </div>
    )

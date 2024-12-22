@@ -65,3 +65,18 @@ export function useUpdateOrderStatus() {
       },
    })
 }
+
+export function useGetListOfCategories() {
+   return useQuery({
+      queryKey: ['admin-categories'],
+      queryFn: async () => {
+         try {
+            const { data } = await axiosInstance.get<any>('/admin/list-of-categories/')
+            return data
+         } catch (error) {
+            console.log(error)
+         }
+      },
+      placeholderData: keepPreviousData,
+   })
+}
