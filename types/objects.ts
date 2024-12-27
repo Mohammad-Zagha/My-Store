@@ -3,7 +3,13 @@ import { AdminAuthSchema, CategorySchema, orderSchema, ProductSchema } from "@/l
 import * as z from 'zod'
 
 export type T_Category = {
-
+   banner?:{
+      arabicName:string,
+      englishName:string
+      description:string
+      image:File | String | undefined
+      product:T_Product | string
+   } | null
     id: string;
     name: string;
     description: string;
@@ -25,6 +31,10 @@ export type T_Product = {
     }[];
     name: string;
     stock: number;
+    name_lower: string;
+    searchKeywords: string[];
+    sold:number
+    createdAt: string
  };
 export type T_Paginated_Response<T> = {
     results: T[],

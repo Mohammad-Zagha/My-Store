@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import {format} from 'date-fns'
 import { AxiosError } from "axios";
 import { toast } from "sonner";
+import { T_Product } from "@/types/objects";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }       
@@ -43,13 +44,11 @@ export function objectToFormData(
 ): FormData {
   for (const property in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, property)) {
-      const formKey = namespace ? `${namespace}[${property}]` : property; // Nested keys use bracket notation
+      const formKey = namespace ? `${namespace}[${property}]` : property; 
       const value = obj[property];
-
-      // Handle arrays
       if (Array.isArray(value)) {
         value.forEach((item, index) => {
-          const indexedKey = `${formKey}[${index}]`; // Array keys: field[0], field[1], etc.
+          const indexedKey = `${formKey}[${index}]`;
           if (typeof item === "object" && item !== null && !(item instanceof File)) {
             objectToFormData(item, formData, indexedKey);
           } else {
@@ -57,11 +56,9 @@ export function objectToFormData(
           }
         });
       }
-      // Handle objects
       else if (typeof value === "object" && value !== null && !(value instanceof File)) {
         objectToFormData(value, formData, formKey);
       }
-      // Handle primitive values and File objects
       else if (value !== null && value !== undefined) {
         formData.append(formKey, value);
       }
@@ -70,6 +67,7 @@ export function objectToFormData(
 
   return formData;
 }
+
 
 export function isObject(value: any): value is object {
   return typeof value === 'object' && !Array.isArray(value) && !(value instanceof Date) && !(value instanceof File)
@@ -100,26 +98,16 @@ export function clean<T extends object>(val: T): T {
 
 export function handleError(error: unknown, message: string = 'حدث خطأ ما') {
   if (error instanceof AxiosError) {
-     const e = error?.response?.data.errors as any
-     //check if error is array
-     if (Array.isArray(e)) {
-      e.forEach((err: any) => {
-        switch (err.type) {
-          case 'field':
-             toast.error(err.msg)
-             break
-          default:
-             toast.error(message)
-             break
-       }
-       })
-      
-     }else
-     {
-      console.log(error)
-     }
+      const errorData = error.response?.data
+      if(errorData && errorData.message){
+         toast.error(errorData.message)
+      }
    
   } else {
      toast.error(message)
   }
+}
+
+export function hasProductImageKey(product: Partial<T_Product>): boolean {
+  return product.images?.some((image) => image.url instanceof File) ?? false
 }

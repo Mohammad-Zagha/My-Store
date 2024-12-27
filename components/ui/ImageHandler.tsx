@@ -1,3 +1,4 @@
+'use client'
 import { MdImageNotSupported } from 'react-icons/md'
 import { Avatar, AvatarFallback, AvatarImage } from './Avatar'
 import { cn } from '@/lib/utils'
@@ -12,10 +13,6 @@ type AvatarProps = {
    className?: string
    onHover?: boolean // Optional hover scaling prop
    onClick?: () => void
-}
-
-const getAvatarFallback = (alt: string) => {
-   return alt.split(' ')[0].charAt(0).toUpperCase() // Fallback for alt text
 }
 
 const CustomAvatar = ({

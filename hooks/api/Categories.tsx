@@ -1,3 +1,4 @@
+'use client'
 import { axiosInstance } from '@/lib/Axios'
 import { hasFileKey, objectToFormData } from '@/lib/utils'
 import { T_Category, T_General_Response, T_Paginated_Response } from '@/types/objects'
@@ -52,26 +53,24 @@ export function useUpdateCategory() {
             throw error
          }
       },
-      onMutate: async ({ id, values }: { id: string; values: Partial<T_Category> }) => {
-         await queryClient.cancelQueries({ queryKey: ['admin-categories'] })
-         const previousCategories = queryClient.getQueryData<T_Paginated_Response<T_Category>>(['admin-categories'])
-         if (previousCategories) {
-            queryClient.setQueryData(['admin-categories'], {
-               ...previousCategories,
-               data: previousCategories.results.map((category) =>
-                  category.id === id ? { ...category, ...values } : category,
-               ),
-            })
-         }
-         return { previousCategories }
-      },
-      onError: (err: any, variables, context) => {
-         if (context?.previousCategories) {
-            queryClient.setQueryData(['admin-categories'], context.previousCategories)
-         }
-      },
-      onSettled: () => {
+
+      onSuccess: () => {
          queryClient.invalidateQueries({ queryKey: ['admin-categories'] })
       },
+   })
+}
+
+export function useGetCategoryById(id: string) {
+   return useQuery({
+      queryKey: ['category', id],
+      queryFn: async () => {
+         try {
+            const { data } = await axiosInstance.get<T_Category>(`/categories/${id}`)
+            return data
+         } catch (error) {
+            console.log(error)
+         }
+      },
+      placeholderData: keepPreviousData,
    })
 }

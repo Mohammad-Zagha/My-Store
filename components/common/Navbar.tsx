@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { IoSearchOutline } from 'react-icons/io5'
 import Link from 'next/link'
@@ -25,7 +26,7 @@ const Navbar = () => {
          initial="hidden"
          animate={hidden ? 'hidden' : 'visible'}
          transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.2 }}
-         className="  p-3 w-full flex justify-between  bg-white shadow-md  transition-transform"
+         className="  p-3 w-full flex justify-between  bg-background-light    transition-transform"
          dir="rtl"
       >
          <Link href={'/'} className="flex center font-SFPro text-3xl font-thin">

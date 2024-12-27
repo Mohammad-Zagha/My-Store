@@ -51,7 +51,7 @@ const FilePreview: React.FC<{
       )}
    </div>
 )
-
+FilePreview.displayName = 'FilePreview'
 const ImagePreview = React.memo<{ file: File | string | null; fileType: string }>(
    ({ file, fileType }) =>
       file !== null &&
@@ -72,7 +72,8 @@ const ImagePreview = React.memo<{ file: File | string | null; fileType: string }
          </div>
       ),
 )
-
+// add display name
+ImagePreview.displayName = 'ImagePreview'
 const DragAndDrop: React.FC<TDnd> = React.forwardRef<HTMLInputElement, TDnd>(
    ({ className, file, setFile, fileType = 'attachment' }, ref) => {
       const onDrop = useCallback((acceptedFiles: File[]) => setFile(acceptedFiles[0]), [setFile])

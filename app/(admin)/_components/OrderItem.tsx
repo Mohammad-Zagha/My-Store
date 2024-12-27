@@ -9,7 +9,11 @@ const OrderItem = ({ item }: { item: T_Product & { quantity: number } }) => {
    return (
       <div className="w-full flex justify-between p-1" dir="rtl">
          <div className="flex center gap-2 w-fit">
-            <CustomAvatar src={item.images[0].url ?? ''} alt={item.name} className="size-[80px] rounded-xl " />
+            <CustomAvatar
+               src={(item.images[0]?.url as string) ?? ''}
+               alt={item.name}
+               className="size-[80px] rounded-xl "
+            />
             <div className="flex flex-col justify-between p-1">
                <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">{item.name}</span>
 

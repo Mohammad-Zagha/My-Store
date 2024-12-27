@@ -3,13 +3,13 @@ import React, { useEffect, useRef } from 'react'
 
 import gsap from 'gsap'
 import { useInView } from 'framer-motion'
-import { useGetAllProducts } from '@/hooks/api/Products'
+import { useGetAllProducts, useGetMostSoldProducts } from '@/hooks/api/Products'
 import ProductContainer from '@/components/common/ProductContainer'
 import AnimatedLink from '@/components/animated/AnimatedLink'
 import { Carousel } from '@/components/Carousels/CardsCarousel'
 
 const BestSellingCarousel = () => {
-   const { data, isLoading } = useGetAllProducts({ page: 1, limit: 8 })
+   const { data, isLoading } = useGetMostSoldProducts({ page: 1, limit: 8 })
    const containerRef = useRef<HTMLDivElement>(null)
    const childRefs = useRef<(HTMLDivElement | null)[]>([])
    const inView = useInView(containerRef, { once: true, margin: '0px' })
@@ -51,7 +51,7 @@ const BestSellingCarousel = () => {
    const cards = products?.map((product, i) => (
       <ProductContainer
          key={i}
-         src={product.images[0].url}
+         src={product.images[0]?.url as string}
          title={product.name}
          price={product.price}
          productid={product.productId}

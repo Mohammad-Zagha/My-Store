@@ -74,15 +74,15 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
                href={`/categories/products/${product?.category.id}`}
             />
          </Link>
-         {product?.images[0] && (
-            <Link href={`/product/${product.productId}`} className="w-full h-[220px]  ">
-               <CustomAvatar
-                  className="rounded-lg object-cover aspect-auto h-[220px] w-full hover:scale-105 transition-transform duration-300"
-                  alt="product"
-                  src={product.images[0].url as string}
-               />
-            </Link>
-         )}
+
+         <Link href={`/product/${product.productId}`} className="w-full h-[220px]  ">
+            <CustomAvatar
+               className="rounded-lg object-cover aspect-auto h-[220px] w-full hover:scale-105 transition-transform duration-300"
+               alt="product"
+               src={(product.images[0]?.url as string) ?? ''}
+            />
+         </Link>
+
          <span className="text-sm font-Cairo text-primary-dark font-semibold text-center h-[100px] overflow-hidden text-ellipsis line-clamp-5">
             {product?.name ?? 'N/A'}
          </span>

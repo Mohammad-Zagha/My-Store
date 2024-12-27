@@ -1,3 +1,4 @@
+'use client'
 import { T_CartItem } from '@/components/cart/CartItem'
 import { axiosInstance } from '@/lib/Axios'
 import { T_Cart, T_Product } from '@/types/objects'

@@ -18,11 +18,18 @@ export const AdminAuthSchema = z.object({
    email: z.string().email({ message: 'البريد الالكتروني مطلوب' }),
    password: z.string().min(1, 'كلمة المرور مطلوبة'),
 })
-
+export const BannerSchema = z.object({
+   arabicName: z.string(),
+   englishName: z.string(),
+   description: z.string(),
+   image: z.string().or(z.instanceof(File)),
+   product: z.string(),
+})
 export const CategorySchema = z.object({
    name: z.string().min(2, 'اسم القسم يجب ان يحتوي على حرفين على الاقل'),
    description: z.string().min(2, 'وصف القسم يجب ان يحتوي على حرفين على الاقل'),
    image: z.string().or(z.instanceof(File)).optional(),
+   banner: BannerSchema.optional().nullable(),
 })
 
 export const ProductSchema = z.object({
@@ -30,11 +37,15 @@ export const ProductSchema = z.object({
    description: z.string().min(2, 'وصف المنتج يجب ان يحتوي على حرفين على الاقل'),
    price: z.number().min(1, 'السعر يجب ان يكون على الاقل'),
    stock: z.number().min(1, 'الكمية يجب ان تكون على الاقل'),
-   discount: z.number().optional().default(0),
-   category: z.string().min(2, 'القسم يجب ان يحتوي على حرفين على الاقل'),
+   discount: z.number().default(0),
+   category: z.object({
+      id: z.string(),
+      name: z.string(),
+   }),
    images: z.array(
       z.object({
          url: z.string().or(z.instanceof(File)).optional(),
       }),
    ),
+   sold: z.number().default(0),
 })

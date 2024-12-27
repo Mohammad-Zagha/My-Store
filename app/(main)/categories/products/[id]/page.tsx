@@ -10,6 +10,7 @@ import React, { useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import usePagination from '@/hooks/Pagination'
 import { ProductCardSkeleton, Skeleton } from '@/components/ui/Skeletons'
+import { useGetCategoryById } from '@/hooks/api/Categories'
 
 const staggerContainer = {
    hidden: { opacity: 0 },
@@ -36,7 +37,7 @@ const Page = () => {
       page,
       limit,
    })
-
+   const { data: category, isLoading: isCategoryLoading } = useGetCategoryById(id)
    const products = data?.pages?.flatMap((page) => page?.results ?? []) ?? []
 
    const loadMoreRef = useRef<HTMLDivElement | null>(null)
@@ -50,7 +51,7 @@ const Page = () => {
 
    return (
       <div className="h-full w-screen bg-transparent  overflow-x-hidden">
-         <Banner />
+         {category && category.banner && <Banner />}
          <div className="w-screen h-full bg-background-dark grid grid-rows-[auto_minmax(0,1fr)] gap-2 pt-6 overflow-x-hidden px-4 md:px-12">
             <div className="h-fit grid grid-cols-3 font-Cairo text-primary-dark text-lg md:text-4xl">
                <div className="col-span-1 flex justify-start items-center">

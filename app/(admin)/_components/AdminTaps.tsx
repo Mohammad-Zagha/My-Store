@@ -5,6 +5,7 @@ import React from 'react'
 import Orders from './taps/Orders'
 import Categories from './taps/Categories'
 import Products from './taps/Products'
+import Offers from './taps/Offers'
 
 const AdminTaps = () => {
    const { value: activeTab, setValue: setActiveTab } = useParamsValues({
@@ -29,6 +30,9 @@ const AdminTaps = () => {
             </TabsContent>
             <TabsContent value="products" className="h-full ">
                <Products />
+            </TabsContent>
+            <TabsContent value="offers" className="h-full ">
+               <Offers />
             </TabsContent>
          </div>
       </Tabs>

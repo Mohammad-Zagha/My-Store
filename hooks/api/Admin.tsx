@@ -1,4 +1,4 @@
-import { T_CartItem } from '@/components/cart/CartItem'
+'use client'
 import { axiosInstance } from '@/lib/Axios'
 import { T_Paginated_Response, T_Product } from '@/types/objects'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'

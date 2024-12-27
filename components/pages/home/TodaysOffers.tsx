@@ -6,13 +6,13 @@ import AnimatedLink from '../../animated/AnimatedLink'
 import ProductCard from '../../common/ProductCard'
 import { useInView } from 'framer-motion'
 import { gsap } from 'gsap'
-import { useGetAllProducts } from '@/hooks/api/Products'
+import { useGetAllProducts, useGetDiscountedProducts } from '@/hooks/api/Products'
 import { ProductCardSkeleton } from '@/components/ui/Skeletons'
 
 const TodaysOffers = () => {
    const containerRef = useRef<HTMLDivElement>(null)
    const inView = useInView(containerRef, { once: true })
-   const { data, isLoading } = useGetAllProducts({ page: 1, limit: 10 })
+   const { data, isLoading } = useGetDiscountedProducts({ page: 1, limit: 10 })
    const products = data?.pages.flatMap((page) => page?.results ?? []) || []
 
    useEffect(() => {

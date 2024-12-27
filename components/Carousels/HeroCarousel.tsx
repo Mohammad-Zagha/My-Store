@@ -5,7 +5,7 @@ import AnimatedLink from '@/components/animated/AnimatedLink'
 import { useGetHomeCategories } from '@/hooks/api/Categories'
 import ImageContainer from '../common/ImageContainer'
 
-export function HeroCarousel() {
+export function CategoriesCarousel() {
    const { data: categories, isLoading } = useGetHomeCategories({
       page: 1,
       limit: 5,
@@ -27,7 +27,7 @@ export function HeroCarousel() {
       <div className="w-full h-full   overflow-hidden">
          {/* Ensures no overflow */}
          <div className="w-full flex justify-between">
-            <h2 className="text-primary-dark font-SFPro text-xl max-md:text-lg"> منتجات وصلت حديثا</h2>
+            <h2 className="text-primary-dark font-SFPro text-xl max-md:text-lg"> تصفح افضل القوائم</h2>
             <AnimatedLink href="/" title="مشاهدة الكل" />
          </div>
 

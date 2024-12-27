@@ -5,8 +5,9 @@ import { cva, VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 import { FaEyeSlash, FaRegEye } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import ButtonLoader from '../common/ButtonLoader'
 const inputVariants = cva(
-   'flex w-full rounded-[13.8px] ring-1 ring-gray-200/70 bg-transparent px-0.5r focus:px-1r font-400 transition-all file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground outline-none focus-visible:ring-[1.5px] focus-visible:ring-main/30 disabled:cursor-not-allowed disabled:opacity-50 invalid:ring-red-500',
+   'flex w-full rounded-[13.8px] ring-1 ring-gray-200/70 bg-transparent px-0.5r focus:px-1r font-400 transition-all file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-primary-light outline-none focus-visible:ring-[1.5px] focus-visible:ring-main/30 disabled:cursor-not-allowed disabled:opacity-50 invalid:ring-red-500',
    {
       variants: {
          s: {
@@ -23,10 +24,11 @@ const inputVariants = cva(
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
    containerClassName?: string
+   isPending?: boolean
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-   ({ containerClassName, className, type, s, ...props }, ref) => {
+   ({ containerClassName, className, isPending, type, s, ...props }, ref) => {
       const [show, setShow] = React.useState(false)
       const getType = React.useCallback(
          (type: InputProps['type']) => {
@@ -38,7 +40,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
          [show, type],
       )
       return (
-         <div className={cn('relative w-full', containerClassName)} dir="rtl">
+         <div className={cn('relative w-full ', containerClassName)} dir="rtl">
             <input type={getType(type)} className={cn(inputVariants({ s, className }))} ref={ref} {...props} />
             {type == 'password' && (
                <button
@@ -48,6 +50,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                >
                   {show ? <FaRegEye size={16} /> : <FaEyeSlash size={16} />}
                </button>
+            )}
+            {isPending && (
+               <div className=" absolute top-0 center-y left-1r">
+                  <ButtonLoader className=" " />
+               </div>
             )}
          </div>
       )
@@ -116,7 +123,7 @@ const InputBox = React.forwardRef<HTMLInputElement, TInputBox>(
       ref,
    ) => {
       return (
-         <div className={cn('flex flex-col gap-0.5r w-full transition-all', containerClassName)}>
+         <div className={cn('flex flex-col gap-0.5r w-full transition-all ', containerClassName)}>
             {label && (
                <InputLabel
                   htmlFor={id}

@@ -13,14 +13,14 @@ import { InputBox } from '@/components/ui/input'
 import { useGetListOfCategories } from '@/hooks/api/Admin'
 import { useUpdateProduct } from '@/hooks/api/Products'
 import { ProductSchema } from '@/lib/zod/Schemas'
-import { T_Product } from '@/types/objects'
+import { T_Paginated_Response, T_Product, T_Products_Inputs } from '@/types/objects'
+import { useQueryClient } from '@tanstack/react-query'
 
 const ProductEditDialog = ({ product }: { product: T_Product }) => {
    const { mutateAsync: updateProduct, isPending } = useUpdateProduct()
    const { data: categories = [], isLoading: categoriesLoading } = useGetListOfCategories()
-
    const [open, setOpen] = useState(false)
-
+   const queryClient = useQueryClient()
    const {
       register,
       formState: { errors },
@@ -31,7 +31,9 @@ const ProductEditDialog = ({ product }: { product: T_Product }) => {
    } = useForm<T_Product>({
       resolver: zodResolver(ProductSchema),
       mode: 'all',
-      defaultValues: product,
+      defaultValues: {
+         ...product,
+      },
    })
 
    const images = watch('images') || []
@@ -78,9 +80,22 @@ const ProductEditDialog = ({ product }: { product: T_Product }) => {
 
    const handleSubmit = async () => {
       await updateProduct(getValues(), {
-         onSuccess: () => {
-            toast.success('تم تعديل المنتج بنجاح')
+         onSuccess: (updatedProduct) => {
+            queryClient.setQueriesData({ queryKey: ['products'] }, (oldData: any) => {
+               if (!oldData) return
+               const updatedData = {
+                  ...oldData,
+                  pages: oldData.pages.map((page: T_Paginated_Response<T_Product>) => {
+                     const updatedItems = page.results.map((item: T_Product) =>
+                        item.productId === updatedProduct?.productId ? updatedProduct : item,
+                     )
+                     return { ...page, results: updatedItems }
+                  }),
+               }
+               return updatedData
+            })
             setOpen(false)
+            toast.success('تم تعديل المنتج بنجاح')
          },
       })
    }
@@ -133,8 +148,9 @@ const ProductEditDialog = ({ product }: { product: T_Product }) => {
                   )}
                />
                <InputBox
-                  value={watch('stock')}
                   containerClassName="col-span-1"
+                  type="number"
+                  value={watch('stock') ?? 0}
                   onChange={(e) => {
                      const value = Number(e.target.value)
                      if (!isNaN(value)) {
@@ -150,8 +166,9 @@ const ProductEditDialog = ({ product }: { product: T_Product }) => {
                   }}
                />
                <InputBox
-                  value={watch('price')}
+                  value={watch('price') ?? 0}
                   containerClassName="col-span-1 h-fit"
+                  type="number"
                   onChange={(e) => {
                      const value = Number(e.target.value)
                      if (!isNaN(value)) {
@@ -167,7 +184,8 @@ const ProductEditDialog = ({ product }: { product: T_Product }) => {
                   }}
                />
                <InputBox
-                  value={watch('discount')}
+                  value={watch('discount') ?? 0}
+                  type="number"
                   containerClassName="col-span-1 h-fit"
                   onChange={(e) => {
                      const value = Number(e.target.value)
