@@ -55,9 +55,9 @@ export default function Home() {
          <div className="h-full col-span-full p-6   flex center bg-background-dark ">
             <BestSellingCarousel />
          </div>
-         <div className="h-full col-span-full  flex center bg-background-light ">
+         {/* <div className="h-full col-span-full  flex center bg-background-light ">
             <BlueChanelDisplay />
-         </div>
+         </div> */}
          <div className="h-screen col-span-full  p-6 grid grid-cols-12 gap-4 overflow-y-auto  bg-background-dark grid-rows-[auto_minmax(0,1fr)]">
             <TodaysOffers />
          </div>
