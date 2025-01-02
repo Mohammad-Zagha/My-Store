@@ -5,13 +5,13 @@ import { Carousel } from './CardsCarousel'
 import AnimatedLink from '../animated/AnimatedLink'
 import gsap from 'gsap'
 import { useInView } from 'framer-motion'
-import { useGetAllProducts } from '@/hooks/api/Products'
+import { useGetNewProducts } from '@/hooks/api/Products'
 
 const NewArrivalsCarousel = () => {
-   const { data: products, isLoading } = useGetAllProducts({ page: 1, limit: 8 })
+   const { data, isLoading } = useGetNewProducts({ page: 1, limit: 8 })
    const containerRef = useRef<HTMLDivElement>(null)
    const inView = useInView(containerRef, { once: true, margin: '0px' })
-
+   const products = data?.pages.flatMap((page) => page?.results ?? []) || []
    useEffect(() => {
       if (inView) {
          // Animate the clipPath of the container
@@ -38,19 +38,19 @@ const NewArrivalsCarousel = () => {
          </div>
          {isLoading ? (
             <></>
-         ) : products?.results?.length === 0 ? (
+         ) : products?.length === 0 ? (
             <></>
          ) : (
             <Carousel
                items={
                   !products
                      ? []
-                     : products?.results?.map((product) => (
+                     : products?.map((product) => (
                           <>
                              <ProductContainer
-                                src={product.images[0].url ?? ''}
+                                src={(product.images[0]?.url as string) ?? ''}
                                 price={product.price}
-                                productid={product.id}
+                                productid={product.productId}
                                 title={product.name}
                              />
                           </>

@@ -14,6 +14,8 @@ const config: Config = {
        backgroundImage: {
           'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
           'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+          shimmer: 'linear-gradient(90deg, #e5e5e5 25%, #f7f7f7 50%, #e5e5e5 75%)',
+
        },
        fontFamily: {
          SFPro: ['SFPro', 'sans-serif'],
@@ -97,6 +99,11 @@ const config: Config = {
              from: { height: '0' },
              to: { height: 'var(--radix-accordion-content-height)' },
           },
+          shimmer: {
+            '0%': { backgroundPosition: '-200% 0' },
+            '100%': { backgroundPosition: '200% 0' },
+         },
+      
           aurora: {
             from: {
               backgroundPosition: "50% 50%, 50% 50%",
@@ -120,6 +127,7 @@ const config: Config = {
           'accordion-up': 'accordion-up 0.2s ease-out',
           'infinite-scroll': 'infinite-scroll 20s linear infinite',
           aurora: "aurora 60s linear infinite",
+          shimmer: 'shimmer 1.5s infinite linear',
 
        },
        gridTemplateColumns: {

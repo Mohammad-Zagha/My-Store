@@ -55,30 +55,18 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
          <Link href="/" className="flex w-full justify-between items-center cursor-pointer" dir="ltr">
             <div className="flex center gap-2 cursor-pointer">
                {product?.discount ? (
-                  <div className="w-fit flex items-center text-primary-dark gap-0.5">
-                     <Image alt="currency" src="/icons/ILS.svg" width={10} height={10} className={cn('mt-1')} />
-                     <span className={cn('font-extrabold text-lg font-Cairo text-primary-dark')}>
-                        {product.discount}
-                     </span>
-                  </div>
-               ) : null}
-               <div className="w-fit flex items-center text-primary-dark gap-0.5">
-                  <Image
-                     alt="currency"
-                     src="/icons/ILS.svg"
-                     width={10}
-                     height={10}
-                     // className={cn('mt-1', discount ? 'opacity-50' : 'opacity-100')}
-                  />
-                  <span
-                     className={cn(
-                        'font-extrabold text-lg font-Cairo text-primary-dark',
-                        product?.discount ?? 'line-through text-primary-dark/50 text-sm decoration-[1px] ',
-                     )}
-                  >
-                     {product?.price ?? '0'}
+                  <span className={cn('font-extrabold text-lg font-Cairo text-primary-dark')}>
+                     ₪ {(product.price - product.discount).toFixed(2)}
                   </span>
-               </div>
+               ) : null}
+               <span
+                  className={cn(
+                     'font-extrabold text-lg font-Cairo text-primary-dark',
+                     product?.discount !== 0 && 'line-through text-primary-dark/50 text-sm decoration-[1px] ',
+                  )}
+               >
+                  ₪ {product?.price ?? 'N/A'}
+               </span>
             </div>
             <AnimatedLink
                className="font-bold text-sm font-Cairo max-w-28 truncate"
@@ -86,15 +74,15 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
                href={`/categories/products/${product?.category.id}`}
             />
          </Link>
-         {product?.images[0] && (
-            <Link href={`/product/${product.productId}`} className="w-full h-[220px]">
-               <CustomAvatar
-                  className="rounded-lg object-cover aspect-auto h-[220px] w-full hover:scale-105 transition-transform duration-300"
-                  alt="product"
-                  src={product.images[0].url}
-               />
-            </Link>
-         )}
+
+         <Link href={`/product/${product.productId}`} className="w-full h-[220px]  ">
+            <CustomAvatar
+               className="rounded-lg object-cover aspect-auto h-[220px] w-full hover:scale-105 transition-transform duration-300"
+               alt="product"
+               src={(product.images[0]?.url as string) ?? ''}
+            />
+         </Link>
+
          <span className="text-sm font-Cairo text-primary-dark font-semibold text-center h-[100px] overflow-hidden text-ellipsis line-clamp-5">
             {product?.name ?? 'N/A'}
          </span>

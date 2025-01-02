@@ -51,26 +51,29 @@ const FilePreview: React.FC<{
       )}
    </div>
 )
-
-const ImagePreview: React.FC<{ file: File | string | null; fileType: string }> = ({ file, fileType }) =>
-   file !== null &&
-   fileType === 'image' &&
-   ((file instanceof File && isImage(file)) || typeof file === 'string') && (
-      <div className="p-3">
-         <div className="rounded-lg overflow-hidden h-[15rem] center">
-            <Image
-               loading="lazy"
-               src={getImageSrc(file)!}
-               {...(file instanceof File ? { onLoad: () => URL.revokeObjectURL(URL.createObjectURL(file)) } : {})}
-               alt={getFileName(file, fileType)}
-               width={300}
-               height={300}
-               className="object-contain h-full !max-h-full w-auto rounded-lg shadow"
-            />
+FilePreview.displayName = 'FilePreview'
+const ImagePreview = React.memo<{ file: File | string | null; fileType: string }>(
+   ({ file, fileType }) =>
+      file !== null &&
+      fileType === 'image' &&
+      ((file instanceof File && isImage(file)) || typeof file === 'string') && (
+         <div className="p-3">
+            <div className="rounded-lg overflow-hidden h-[15rem] center">
+               <Image
+                  loading="lazy"
+                  src={getImageSrc(file)!}
+                  {...(file instanceof File ? { onLoad: () => URL.revokeObjectURL(URL.createObjectURL(file)) } : {})}
+                  alt={getFileName(file, fileType)}
+                  width={300}
+                  height={300}
+                  className="object-contain h-full !max-h-full w-auto rounded-lg shadow"
+               />
+            </div>
          </div>
-      </div>
-   )
-
+      ),
+)
+// add display name
+ImagePreview.displayName = 'ImagePreview'
 const DragAndDrop: React.FC<TDnd> = React.forwardRef<HTMLInputElement, TDnd>(
    ({ className, file, setFile, fileType = 'attachment' }, ref) => {
       const onDrop = useCallback((acceptedFiles: File[]) => setFile(acceptedFiles[0]), [setFile])
@@ -124,12 +127,14 @@ export const DragAndDropImage = React.forwardRef<HTMLInputElement, TDndImage>(
       const onDrop = useCallback(
          (acceptedFiles: File[]) => {
             if (acceptedFiles[0]) setFile(acceptedFiles[0])
-            else setFile(null)
          },
          [setFile],
       )
 
-      const removeFile = () => setFile(null)
+      const removeFile = (e: React.MouseEvent) => {
+         e.stopPropagation() // Prevent triggering the drag-and-drop input
+         setFile(null) // Propagate null to parent for removal
+      }
 
       const { getRootProps, getInputProps, isDragActive } = useDropzone({
          onDrop,
@@ -162,17 +167,14 @@ export const DragAndDropImage = React.forwardRef<HTMLInputElement, TDndImage>(
                      alt={getFileName(file, 'image')}
                      width={width || size}
                      height={height || size}
-                     className="object-cover w-full h-full" // Ensures the image fits within the container
+                     className="object-cover w-full h-full"
                   />
                ) : (
-                  <Upload className="size-7 text-muted-foreground " />
+                  <Upload className="size-7 text-muted-foreground" />
                )}
-               <div className="z-10 absolute bottom-2 center-x size-7 center circle pointer bg-primary-light/15">
-                  <Camera className="size-4 text-white" />
-               </div>
                {file && (
-                  <div className="z-40 absolute inset-1 opacity-0 pointer-events-none group-hover:opacity-100 transition-all group-hover:pointer-events-auto center circle">
-                     <Button variant={'destructive'} onClick={removeFile} size={'icon'} className="">
+                  <div className="z-50 absolute inset-1 opacity-0 pointer-events-none group-hover:opacity-100 transition-all group-hover:pointer-events-auto center circle">
+                     <Button variant={'destructive'} onClick={removeFile} size={'icon'}>
                         <Trash2 className="size-4" />
                      </Button>
                   </div>

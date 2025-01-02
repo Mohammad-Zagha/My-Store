@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import CustomAvatar from '../ui/ImageHandler'
 import { Button } from '../chadcn/button'
@@ -29,7 +30,11 @@ export const CartItem = ({ cartItem }: { cartItem: T_Product & { quantity: numbe
                عرض خاص
             </div>
          )}
-         <CustomAvatar src={cartItem.images[0].url ?? ''} alt={cartItem.name} className="size-[80px] rounded-xl " />
+         <CustomAvatar
+            src={(cartItem.images[0]?.url as string) ?? ''}
+            alt={cartItem.name}
+            className="size-[80px] rounded-xl "
+         />
          <div className="flex flex-col justify-between p-1">
             <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">{cartItem.name}</span>
             <div className="flex gap-2 justify-start items-center ">
@@ -99,7 +104,11 @@ export const CartPageItem = ({ cartItem }: { cartItem: T_Product & { quantity: n
             </div>
          )}
          <div className="flex center gap-2 w-fit ">
-            <CustomAvatar src={cartItem.images[0].url ?? ''} alt={cartItem.name} className="size-[80px] rounded-xl " />
+            <CustomAvatar
+               src={(cartItem.images[0]?.url as string) ?? ''}
+               alt={cartItem.name}
+               className="size-[80px] rounded-xl "
+            />
             <div className="flex flex-col justify-between p-1">
                <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">
                   {cartItem.name}

@@ -9,6 +9,8 @@ interface CarouselProps {
    items: JSX.Element[]
    initialScroll?: number
    isLoading: boolean
+   buttonsClassName?: string
+   containerClassName?: string
 }
 
 export type Card = {
@@ -26,7 +28,13 @@ export const CarouselContext = createContext<{
    currentIndex: 0,
 })
 
-export const Carousel = ({ items, initialScroll = 0, isLoading }: CarouselProps) => {
+export const Carousel = ({
+   items,
+   buttonsClassName,
+   containerClassName,
+   initialScroll = 0,
+   isLoading,
+}: CarouselProps) => {
    const carouselRef = React.useRef<HTMLDivElement>(null)
    const [canScrollLeft, setCanScrollLeft] = React.useState(false)
    const [canScrollRight, setCanScrollRight] = React.useState(true)
@@ -80,16 +88,16 @@ export const Carousel = ({ items, initialScroll = 0, isLoading }: CarouselProps)
 
    return (
       <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
-         <div className="relative w-full overflow-hidden ">
+         <div className={cn('relative w-full overflow-hidden', containerClassName)}>
             {/* Overflow hidden added */}
             <div
-               className="flex w-full overflow-x-scroll py-5 md:py-5 scroll-smooth [scrollbar-width:none]"
+               className="flex w-full overflow-x-scroll py-5  scroll-smooth [scrollbar-width:none]"
                ref={carouselRef}
                onScroll={checkScrollability}
             >
                <div
                   className={cn(
-                     'flex flex-row gap-4 max-w-full w-full h-fit md:h-[40rem] mx-auto flex-nowrap', // Updated for width control and no-wrap
+                     'flex flex-row gap-4 max-w-full w-full h-fit  mx-auto flex-nowrap', // Updated for width control and no-wrap
                   )}
                >
                   {isLoading
@@ -128,7 +136,7 @@ export const Carousel = ({ items, initialScroll = 0, isLoading }: CarouselProps)
                        ))}
                </div>
             </div>
-            <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
+            <div className={cn('absolute top-1/2 left-4 transform -translate-y-1/2 z-10', buttonsClassName)}>
                <button
                   className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
                   onClick={scrollRight}
@@ -136,7 +144,7 @@ export const Carousel = ({ items, initialScroll = 0, isLoading }: CarouselProps)
                   <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
                </button>
             </div>
-            <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
+            <div className={cn('absolute top-1/2 right-4 transform -translate-y-1/2 z-10', buttonsClassName)}>
                <button
                   className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
                   onClick={scrollLeft}

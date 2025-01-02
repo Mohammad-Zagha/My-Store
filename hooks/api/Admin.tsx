@@ -1,5 +1,6 @@
-import { T_CartItem } from '@/components/cart/CartItem'
+'use client'
 import { axiosInstance } from '@/lib/Axios'
+import { handleError } from '@/lib/utils'
 import { T_Paginated_Response, T_Product } from '@/types/objects'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
@@ -12,6 +13,7 @@ export type T_Admin_Order = {
    items: (T_Product & { quantity: number })[]
    status: 'new' | 'pending' | 'completed' | 'canceled' // Use union type for specific statuses
    totalAmount: number
+   deliveryCost: number
    initialAmount: number
    numberOfOfferItems: number
    totalDiscountAmount: number
@@ -62,6 +64,69 @@ export function useUpdateOrderStatus() {
       },
       onSettled: () => {
          queryClient.invalidateQueries({ queryKey: ['completed_orders'] })
+      },
+   })
+}
+
+export function useGetListOfCategories() {
+   return useQuery({
+      queryKey: ['admin-categories'],
+      queryFn: async () => {
+         try {
+            const { data } = await axiosInstance.get<any>('/admin/list-of-categories/')
+            return data
+         } catch (error) {
+            console.log(error)
+         }
+      },
+      placeholderData: keepPreviousData,
+   })
+}
+export type T_DeliveryAddress = {
+   id: string
+   address: string
+   cost: number
+}
+export function useAddDeliveryAddress() {
+   return useMutation({
+      mutationFn: async ({ data }: { data: T_DeliveryAddress }) => {
+         try {
+            const { data: response } = await axiosInstance.post<T_DeliveryAddress>('/admin/delivery-address', data)
+            return response
+         } catch (error) {
+            handleError(error)
+            throw error
+         }
+      },
+   })
+}
+
+export function useDeleteDeliveryAddress() {
+   return useMutation({
+      mutationFn: async ({ id }: { id: string }) => {
+         try {
+            const { data } = await axiosInstance.delete(`/admin/delivery-address/${id}`)
+            return data
+         } catch (error) {
+            handleError(error)
+            throw error
+         }
+      },
+   })
+}
+export function useUpdateDeliveryAddress() {
+   return useMutation({
+      mutationFn: async ({ data }: { data: T_DeliveryAddress }) => {
+         try {
+            const { data: response } = await axiosInstance.patch<T_DeliveryAddress>(
+               `/admin/delivery-address/${data.id}`,
+               data,
+            )
+            return response
+         } catch (error) {
+            handleError(error)
+            throw error
+         }
       },
    })
 }

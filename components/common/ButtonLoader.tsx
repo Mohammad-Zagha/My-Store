@@ -1,8 +1,9 @@
 import React from 'react'
-import '@/styles/Loader.css'
-const Loader = () => {
+import '@/styles/ButtonLoader.css'
+import { cn } from '@/lib/utils'
+const ButtonLoader = ({ className }: { className?: string }) => {
    return (
-      <div className="dot-spinner">
+      <div className={cn('dot-spinner --uib-color:black', className)}>
          <div className="dot-spinner__dot"></div>
          <div className="dot-spinner__dot"></div>
          <div className="dot-spinner__dot"></div>
@@ -15,4 +16,4 @@ const Loader = () => {
    )
 }
 
-export default Loader
+export default ButtonLoader

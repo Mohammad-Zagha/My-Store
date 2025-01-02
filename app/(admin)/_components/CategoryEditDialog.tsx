@@ -1,11 +1,12 @@
 import AnimatedButton from '@/components/animated/AnimatedButton'
 import { Button } from '@/components/chadcn/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/chadcn/dialog'
-import Loader from '@/components/common/Loader'
+import ButtonLoader from '@/components/common/ButtonLoader'
 import TextAreaBox from '@/components/common/text-area-box'
 import { DragAndDropImage } from '@/components/ui/DND'
 import { InputBox } from '@/components/ui/input'
 import { useUpdateCategory } from '@/hooks/api/Categories'
+import { objectToFormData } from '@/lib/utils'
 import { CategorySchema } from '@/lib/zod/Schemas'
 import { T_Category, T_Category_Inputs } from '@/types/objects'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,19 +19,23 @@ const CategoryEditDialog = ({ category }: { category: T_Category }) => {
    const { register, control, formState, setValue, handleSubmit } = useForm<T_Category_Inputs>({
       resolver: zodResolver(CategorySchema),
       mode: 'onBlur',
+      defaultValues: {
+         name: category.name,
+         image: category.image,
+         description: category.description,
+         banner: null,
+      },
    })
-   useEffect(() => {
-      setValue('name', category.name)
-      setValue('image', category.image)
-      setValue('description', category.description)
-   }, [])
+
    const onSubmit: SubmitHandler<T_Category_Inputs> = (data) => {
-      console.log(data)
       updateMutation.mutateAsync(
          {
             id: category.id,
             values: {
-               ...data,
+               name: data.name,
+               image: data.image,
+               description: data.description,
+               banner: data.banner,
             },
          },
          {

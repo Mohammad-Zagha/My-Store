@@ -1,32 +1,44 @@
 import { TInstruction } from "@/components/ui/input";
-import { AdminAuthSchema, CategorySchema, orderSchema } from "@/lib/zod/Schemas";
+import { AdminAuthSchema, CategorySchema, orderSchema, ProductSchema } from "@/lib/zod/Schemas";
 import * as z from 'zod'
+export type T_Banner = {
+   arabicName?:string,
+   englishName?:string
+   description?:string
+   image?:File | string
+   product:T_Product | string
+}
 export type T_Category = {
-
+    banner?:T_Banner | null
     id: string;
     name: string;
     description: string;
-    image: string;
+    image: string | File;
+    name_lower: string
+    searchKeywords: string[]
+    createdAt: string
 
 }
+
 export type T_Product = {
-    productId: string,
-    description: string,
-    discount: number,
-    price: 100,
+    productId: string;
+    description: string;
+    discount: number;
+    price: number;
     category: {
-        id: string,
-        name: string
-    },
-    images:[
-        {
-            url:string,
-      
-        }
-    ],
-    name:string,
-    stock:number
-}
+       id: string;
+       name: string;
+    };
+    images: {
+       url: string | File | undefined;
+    }[];
+    name: string;
+    stock: number;
+    name_lower: string;
+    searchKeywords: string[];
+    sold:number
+    createdAt: string
+ };
 export type T_Paginated_Response<T> = {
     results: T[],
     currentPage:number,
@@ -41,7 +53,7 @@ export type T_Cart ={
 export type T_Order = z.infer<typeof orderSchema>
 export type T_Admin_Auth = z.infer<typeof AdminAuthSchema>
 export type T_Category_Inputs = z.infer<typeof CategorySchema>
-
+export type T_Products_Inputs = z.infer<typeof ProductSchema>
 
 export interface TextAreaBoxProps extends React.ComponentProps<'textarea'>, ILabelBaseProps, IInstructionBaseProps {
     containerClassName?: string
@@ -65,32 +77,4 @@ export interface TextAreaBoxProps extends React.ComponentProps<'textarea'>, ILab
     message: string
  }
 
- export function objectToFormData(
-    obj: Record<string, any>,
-    formData: FormData = new FormData(),
-    namespace?: string,
- ): FormData {
-    for (const property in obj) {
-       if (obj.hasOwnProperty(property)) {
-          const formKey = namespace ? `${namespace}.${property}` : property
-          const value = obj[property]
- 
-          if (Array.isArray(value)) {
-             value.forEach((item) => {
-                const indexedKey = `${formKey}`
-                if (typeof item === 'object' && item !== null && !(item instanceof File)) {
-                   objectToFormData(item, formData, indexedKey)
-                } else {
-                   formData.append(indexedKey, item)
-                }
-             })
-          } else if (typeof value === 'object' && value !== null && !(value instanceof File)) {
-             objectToFormData(value, formData, formKey)
-          } else {
-             formData.append(formKey, value)
-          }
-       }
-    }
- 
-    return formData
- }
+export type T_Sort = 'newest' | 'oldest' | 'a-z' | 'z-a' | ''

@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
-import { HeroCarousel } from '@/components/Carousels/HeroCarousel'
+import { CategoriesCarousel } from '@/components/Carousels/HeroCarousel'
 import StatsSection from '@/components/pages/home/StatsSection'
 import { CatgoryCarousel } from '@/components/Carousels/CatgoryCarousel'
 import NewArrivalsCarousel from '@/components/Carousels/NewArrivalsCarousel'
@@ -43,7 +43,7 @@ export default function Home() {
                className="py-4 font-semibold text-lg text-primary-dark font-Cario bg-yellow-300"
             />
             <div className="px-6 ">
-               <HeroCarousel />
+               <CategoriesCarousel />
             </div>
          </div>
          <div className="h-full col-span-full  p-6   bg-background-light grid-rows-[auto_minmax(0,1fr)] ">

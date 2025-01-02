@@ -1,5 +1,4 @@
 'use client'
-import { CartPageItem } from '@/components/cart/CartItem'
 import { Button } from '@/components/chadcn/button'
 import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components/chadcn/dialog'
 import DataTable from '@/components/ui/DataTable'
@@ -11,6 +10,7 @@ import React, { useMemo } from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import OrderItem from '../OrderItem'
 import { toast } from 'sonner'
+import { Skeleton } from '@/components/ui/Skeletons'
 
 const Orders = () => {
    const { data: orders, isLoading } = useGetAllOrders()
@@ -61,13 +61,26 @@ const Orders = () => {
    )
    return (
       <div className="w-full h-full">
-         <DataTable
-            data={tableData}
-            isPending={isLoading}
-            columns={Columns}
-            renderAccordionContent={(row) => <RenderAccordion row={row} />}
-            modalContent={(row) => <RenderDialog row={row} />}
-         />
+         {isLoading ? (
+            <div className="w-full h-full flex flex-col ">
+               <Skeleton className="w-full h-10 mb-10" />
+               <Skeleton className="w-full h-5 mb-5" />
+               <Skeleton className="w-full h-5 mb-5" />
+               <Skeleton className="w-full h-5 mb-5" />
+               <Skeleton className="w-full h-5 mb-5" />
+               <Skeleton className="w-full h-5 mb-5" />
+               <Skeleton className="w-full h-5 mb-5" />
+               <Skeleton className="w-full h-5 mb-5" />
+               <Skeleton className="w-full h-5 mb-5" />
+            </div>
+         ) : (
+            <DataTable
+               data={tableData}
+               columns={Columns}
+               renderAccordionContent={(row) => <RenderAccordion row={row} />}
+               modalContent={(row) => <RenderDialog row={row} />}
+            />
+         )}
       </div>
    )
 }
@@ -218,9 +231,13 @@ function RenderDialog({ row }: { row: T_Admin_Order }) {
                      الغاء
                   </Button>
                </div>
-               <div className="flex flex-col items-center gap-2 h-full ">
-                  <span className="font-Cairo text-lg font-semibold text-primary-dark">
-                     {row.totalAmount.toFixed(2)}
+               <div className="flex flex-col items-start  h-full leading-1 ">
+                  <span className="font-Cairo font-semibold text-primary-dark/80 ">₪ {row.deliveryCost} +</span>
+                  <span className="font-Cairo font-semibold text-primary-dark/80 border-b border-gray-700">
+                     ₪ {row.totalAmount.toFixed(2)}
+                  </span>
+                  <span className="font-Cairo text-lg font-semibold text-primary-dark ">
+                     ₪ {row.deliveryCost + row.totalAmount}
                   </span>
                </div>
             </div>

@@ -1,9 +1,11 @@
+'use client'
 import { T_CartItem } from '@/components/cart/CartItem'
 import { axiosInstance } from '@/lib/Axios'
 import { T_Cart, T_Product } from '@/types/objects'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useRef } from 'react'
 import { toast } from 'sonner'
+import { T_DeliveryAddress } from './Admin'
 
 export function useGetCart() {
    return useQuery({
@@ -287,6 +289,7 @@ type T_Cart_Checkout = {
    name: string
    phone: string
 }
+
 export function useCheckoutMutation() {
    return useMutation({
       mutationFn: async (details: T_Cart_Checkout) => {
@@ -295,6 +298,16 @@ export function useCheckoutMutation() {
       },
       onSuccess: () => {
          toast.success('تم ارسال الطلب بنجاح')
+      },
+   })
+}
+
+export function useGetDeliveryAdress() {
+   return useQuery({
+      queryKey: ['delivery-address'],
+      queryFn: async () => {
+         const { data } = await axiosInstance.get<T_DeliveryAddress[]>('/cart/delivery-address/')
+         return data
       },
    })
 }

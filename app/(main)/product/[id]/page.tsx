@@ -17,22 +17,24 @@ import ProductCard from '@/components/common/ProductCard'
 import { motion } from 'framer-motion'
 import { ProductCardSkeleton, Skeleton } from '@/components/ui/Skeletons'
 import { useAddToCart } from '@/hooks/api/Cart'
+import { FullAddButton } from '@/components/animated/AddButton'
 const Page = () => {
    const { id } = useParams()
    const productId = Array.isArray(id) ? id[0] : id
    const addToCardMutaion = useAddToCart()
    const {
-      data: products,
+      data: productsPagenated,
       isLoading: isProductLoading,
       error: productsError,
    } = useGetAllProducts({ page: 1, limit: 10 })
    const { data, isLoading, error } = useGetProduct(productId)
-   const [image, setImage] = React.useState<string | undefined>(data?.images[0].url)
+   const [image, setImage] = React.useState<string | undefined>(data?.images[0]?.url as string)
    const [count, setCount] = React.useState(1)
+   const products = productsPagenated?.pages.flatMap((page) => page?.results ?? []) || []
 
    useEffect(() => {
       if (data) {
-         setImage(data.images[0].url)
+         setImage(data.images[0]?.url as string)
       }
    }, [data])
 
@@ -120,9 +122,7 @@ const Page = () => {
                            <LucideMinus className="text-primary-dark" />
                         </Button>
                      </div>
-                     <Button
-                        variant="default"
-                        size={'default'}
+                     <FullAddButton
                         className="w-1/2 text-white"
                         onClick={() => {
                            addToCardMutaion.mutate({
@@ -132,14 +132,7 @@ const Page = () => {
                         }}
                      >
                         اضافة الى السلة
-                     </Button>
-                     <Button
-                        variant={'default'}
-                        size={'icon'}
-                        className="rounded-lg text-primary-dark bg-white shadow-md hover:bg-gray-100"
-                     >
-                        <MdFavoriteBorder size={22} />
-                     </Button>
+                     </FullAddButton>
                   </div>
                </div>
                <div className="flex flex-col justify-between items-center">
@@ -155,8 +148,8 @@ const Page = () => {
                         data.images.map((image, index) => (
                            <CustomAvatar
                               key={index}
-                              src={image.url}
-                              onClick={() => setImage(image.url)}
+                              src={image?.url as string}
+                              onClick={() => setImage(image?.url as string)}
                               alt={'img'}
                               className="h-20 w-20 rounded-lg object-cover hover:scale-105 transition-transform duration-300 pointer"
                            />
@@ -190,8 +183,8 @@ const Page = () => {
                   Array(3)
                      .fill(0)
                      .map((_, index) => <ProductCardSkeleton key={index} />)
-               ) : products && products.results.length > 0 ? (
-                  products.results.map((product) => (
+               ) : products && products.length > 0 ? (
+                  products.map((product) => (
                      <motion.div key={product.productId} className="min-h-[400px] flex">
                         <ProductCard product={product} />
                      </motion.div>
