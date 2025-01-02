@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api'
+const baseURL = process.env.NEXT_PUBLIC_API_URL ?? 'https://perfume-shop-backend.onrender.com/api'
 
 function createAxiosInstance({ withAuth }: { withAuth: boolean } = { withAuth: false }): AxiosInstance {
    const axiosInstance = axios.create({
