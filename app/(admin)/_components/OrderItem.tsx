@@ -20,7 +20,11 @@ const OrderItem = ({ item }: { item: T_Product & { quantity: number } }) => {
                <span className="font-Cairo text-xs text-primary-dark/70 max-w-[250px] line-clamp-2">
                   {item.description}
                </span>
-               <span className="font-Cairo text-xs text-primary-dark/70">x{item.quantity}</span>
+               <div className="font-Cairo text-sm text-primary-dark/70 flex w-fit center gap-2">
+                  <span>{item.quantity}</span>
+                  <span>x</span>
+                  <span>₪ {item.price}</span>
+               </div>
             </div>
          </div>
          <div className="flex justify-center items-center flex-col w-fit  ">

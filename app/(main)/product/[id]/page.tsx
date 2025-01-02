@@ -17,6 +17,7 @@ import ProductCard from '@/components/common/ProductCard'
 import { motion } from 'framer-motion'
 import { ProductCardSkeleton, Skeleton } from '@/components/ui/Skeletons'
 import { useAddToCart } from '@/hooks/api/Cart'
+import { FullAddButton } from '@/components/animated/AddButton'
 const Page = () => {
    const { id } = useParams()
    const productId = Array.isArray(id) ? id[0] : id
@@ -121,9 +122,7 @@ const Page = () => {
                            <LucideMinus className="text-primary-dark" />
                         </Button>
                      </div>
-                     <Button
-                        variant="default"
-                        size={'default'}
+                     <FullAddButton
                         className="w-1/2 text-white"
                         onClick={() => {
                            addToCardMutaion.mutate({
@@ -133,14 +132,7 @@ const Page = () => {
                         }}
                      >
                         اضافة الى السلة
-                     </Button>
-                     <Button
-                        variant={'default'}
-                        size={'icon'}
-                        className="rounded-lg text-primary-dark bg-white shadow-md hover:bg-gray-100"
-                     >
-                        <MdFavoriteBorder size={22} />
-                     </Button>
+                     </FullAddButton>
                   </div>
                </div>
                <div className="flex flex-col justify-between items-center">

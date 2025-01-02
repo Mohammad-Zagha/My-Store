@@ -26,7 +26,7 @@ const Navbar = () => {
          initial="hidden"
          animate={hidden ? 'hidden' : 'visible'}
          transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.2 }}
-         className="  p-3 w-full flex justify-between  bg-background-light    transition-transform"
+         className="  p-3 w-full flex justify-between  bg-background-light    transition-transform fixed top-0 right-0 col-span-full  h-fit   z-[999]"
          dir="rtl"
       >
          <Link href={'/'} className="flex center font-SFPro text-3xl font-thin">

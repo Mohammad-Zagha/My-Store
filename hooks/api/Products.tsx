@@ -1,18 +1,30 @@
 'use client'
 import { axiosInstance } from '@/lib/Axios'
 import { handleError, hasFileKey, hasProductImageKey, objectToFormData } from '@/lib/utils'
-import { T_Category, T_Paginated_Response, T_Product } from '@/types/objects'
+import { T_Category, T_Paginated_Response, T_Product, T_Sort } from '@/types/objects'
 import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
-export function useGetCategoryProducts({ page = 1, limit = 5, id }: { page: number; limit: number; id: string }) {
+export function useGetCategoryProducts({
+   page = 1,
+   limit = 5,
+   id,
+   sort = '',
+   search = '',
+}: {
+   page: number
+   limit: number
+   id: string
+   sort?: T_Sort
+   search?: string
+}) {
    return useInfiniteQuery({
-      queryKey: ['category-products', { id, page, limit }],
+      queryKey: ['category-products', { id, page, limit, sort, search }],
       initialPageParam: 1,
       queryFn: async ({ pageParam = 1 }) => {
          try {
             const { data } = await axiosInstance.get<T_Paginated_Response<T_Product>>(`/products/category/${id}`, {
-               params: { page: pageParam, limit },
+               params: { page: pageParam, limit, sort, search },
             })
             return data
          } catch (error) {

@@ -5,20 +5,32 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { orderSchema } from '@/lib/zod/Schemas'
 import { Combobox } from '@/components/ui/combobox'
-import { Button } from '@/components/chadcn/button'
 import { cn } from '@/lib/utils'
-import { useCheckoutMutation } from '@/hooks/api/Cart'
+import { useCheckoutMutation, useGetDeliveryAdress } from '@/hooks/api/Cart'
 import { useQueryClient } from '@tanstack/react-query'
-const OrderForm = ({ disabled = true }: { disabled: boolean }) => {
-   const checkoutMutation = useCheckoutMutation()
+import { FullAddButton } from '@/components/animated/AddButton'
+import { IoBagCheckOutline } from 'react-icons/io5'
+import { T_DeliveryAddress } from '@/hooks/api/Admin'
+const OrderForm = ({
+   disabled = true,
+   setDeliveryAddress,
+}: {
+   disabled: boolean
+   setDeliveryAddress: (address: T_DeliveryAddress | null) => void
+}) => {
+   const { mutateAsync: checkoutMutation, isPending: isCheckoutPending } = useCheckoutMutation()
+   const { data: deliveryAddress, isPending } = useGetDeliveryAdress()
    const queryClient = useQueryClient()
-   const { register, control, formState, handleSubmit, reset, getValues } = useForm<T_Order>({
+   const { register, control, formState, handleSubmit, reset, trigger } = useForm<T_Order>({
       resolver: zodResolver(orderSchema),
-      defaultValues: {},
+      defaultValues: {
+         city: '',
+      },
       mode: 'all',
    })
    const onSubmit: SubmitHandler<T_Order> = (data) => {
-      checkoutMutation.mutateAsync(
+      trigger()
+      checkoutMutation(
          {
             name: data.firstName + ' ' + data.lastName,
             phone: data.phone,
@@ -29,6 +41,7 @@ const OrderForm = ({ disabled = true }: { disabled: boolean }) => {
             onSuccess: () => {
                queryClient.invalidateQueries({ queryKey: ['cart'] })
                reset()
+               setDeliveryAddress(null)
             },
          },
       )
@@ -36,6 +49,7 @@ const OrderForm = ({ disabled = true }: { disabled: boolean }) => {
    useEffect(() => {
       if (disabled) {
          reset()
+         setDeliveryAddress(null)
       }
    }, [disabled])
    return (
@@ -71,13 +85,25 @@ const OrderForm = ({ disabled = true }: { disabled: boolean }) => {
             control={control}
             render={({ field }) => (
                <Combobox
-                  options={['رام الله', 'طولكرم', 'نابلس', 'الخليل']}
+                  options={deliveryAddress?.map((item) => item.address) ?? []}
                   value={field.value}
-                  setValue={(value) => field.onChange(value)}
+                  setValue={(value) => {
+                     field.onChange(value)
+                     const address = deliveryAddress?.find((item) => item.address === value)
+                     if (address) {
+                        setDeliveryAddress(address)
+                     } else {
+                        setDeliveryAddress(null)
+                     }
+                  }}
+                  disabled={isPending}
                   label="المدينة"
                   placeholder="المدينة"
                   isRequired
                   triggerClassName="col-span-1 h-10 rounded-lg "
+                  instructions={{
+                     error: formState.errors.city?.message ?? '',
+                  }}
                />
             )}
          />
@@ -103,9 +129,14 @@ const OrderForm = ({ disabled = true }: { disabled: boolean }) => {
             }}
          />
          {/* <InputBox label="البريد الالكتروني" type="email" {...register('email')} containerClassName="col-span-full" /> */}
-         <Button type="submit" size={'sm'} className="col-span-full" disabled={!formState.isValid}>
+         <FullAddButton
+            className="col-span-full"
+            disabled={disabled || isPending}
+            isLoading={isCheckoutPending}
+            icon={<IoBagCheckOutline className="text-white" size={24} />}
+         >
             اكمال الطلب
-         </Button>
+         </FullAddButton>
       </form>
    )
 }

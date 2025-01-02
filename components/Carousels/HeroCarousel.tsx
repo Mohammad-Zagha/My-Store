@@ -28,7 +28,7 @@ export function CategoriesCarousel() {
          {/* Ensures no overflow */}
          <div className="w-full flex justify-between">
             <h2 className="text-primary-dark font-SFPro text-xl max-md:text-lg"> تصفح افضل القوائم</h2>
-            <AnimatedLink href="/" title="مشاهدة الكل" />
+            <AnimatedLink href="/categories" title="مشاهدة الكل" />
          </div>
 
          {<Carousel items={images!} isLoading={isLoading} />}

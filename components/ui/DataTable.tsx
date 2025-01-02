@@ -194,7 +194,7 @@ export function TableSkeleton({ columnsLength }: { columnsLength: number }) {
          render={(ele) => (
             <TableRow key={ele}>
                <TableCell colSpan={columnsLength}>
-                  <Skeleton className="h-12 w-full rounded-2xl" />
+                  <Skeleton className="h-[50px]" />
                </TableCell>
             </TableRow>
          )}

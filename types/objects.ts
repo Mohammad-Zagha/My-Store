@@ -1,19 +1,22 @@
 import { TInstruction } from "@/components/ui/input";
 import { AdminAuthSchema, CategorySchema, orderSchema, ProductSchema } from "@/lib/zod/Schemas";
 import * as z from 'zod'
-
+export type T_Banner = {
+   arabicName?:string,
+   englishName?:string
+   description?:string
+   image?:File | string
+   product:T_Product | string
+}
 export type T_Category = {
-   banner?:{
-      arabicName:string,
-      englishName:string
-      description:string
-      image:File | String | undefined
-      product:T_Product | string
-   } | null
+    banner?:T_Banner | null
     id: string;
     name: string;
     description: string;
     image: string | File;
+    name_lower: string
+    searchKeywords: string[]
+    createdAt: string
 
 }
 
@@ -74,3 +77,4 @@ export interface TextAreaBoxProps extends React.ComponentProps<'textarea'>, ILab
     message: string
  }
 
+export type T_Sort = 'newest' | 'oldest' | 'a-z' | 'z-a' | ''

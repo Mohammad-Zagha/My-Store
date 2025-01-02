@@ -7,7 +7,7 @@ const phone_number_schema = z
 
 export const orderSchema = z.object({
    // email: z.string().email().optional(),
-   city: z.string({ message: 'المدينة مطلوبة' }),
+   city: z.string({ message: 'المدينة مطلوبة' }).min(2, 'المدينة مطلوبة'),
    address: z.string({ message: 'العنوان مطلوب' }).min(5, 'العنوان يجب ان يحتوي على 5 احرف على الاقل'),
    firstName: z.string({ message: 'الاسم الاول مطلوب' }).min(2, 'الاسم الاول يجب ان يحتوي على حرفين على الاقل'),
    lastName: z.string({ message: 'الاسم الاخير مطلوب' }).min(2, 'الاسم الاخير يجب ان يحتوي على حرفين على الاقل'),
@@ -48,4 +48,10 @@ export const ProductSchema = z.object({
       }),
    ),
    sold: z.number().default(0),
+})
+
+export const deliveryAddressSchema = z.object({
+   id: z.string().optional(),
+   address: z.string().min(2, 'العنوان يجب ان يحتوي على حرفين على الاقل'),
+   cost: z.number().min(0, 'السعر يجب ان يكون موجب'),
 })
