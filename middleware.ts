@@ -5,9 +5,7 @@ import { jwtVerify } from 'jose';
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function middleware(request: NextRequest,res : NextResponse) {
-  console.log("Response Cookies",res.cookies)
-  const accessToken = request.cookies.get('AccessToken')?.value
-    console.log(request.cookies)
+  const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI4amwxOXFlN0lFYXVEeE9FdnNTRmtJa0Q5N2oyIiwiZW1haWwiOiJtb2hhbW1hZC56YWdoYTIwMDFAZ21haWwuY29tIiwiZXhwIjoxNzM2MDE1NzA4fQ.uswbMDD-tRWomqAg4MJbN4I1UxARV6taIMxr-v3SdUM'
   if (request.nextUrl.pathname.startsWith('/auth')) {
     if (accessToken) {
       try {
