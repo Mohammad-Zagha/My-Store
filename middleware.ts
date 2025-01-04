@@ -6,7 +6,7 @@ import { getCookie } from './app/actions';
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function middleware(request: NextRequest) {
-  const accessToken = await getCookie('accessToken');
+  const accessToken = await getCookie('AccessToken');
     console.log(accessToken)
   if (request.nextUrl.pathname.startsWith('/auth')) {
     if (accessToken) {
