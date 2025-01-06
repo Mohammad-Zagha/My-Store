@@ -24,10 +24,6 @@ const Page = () => {
       sort: order, // Pass order to API
    })
 
-   useEffect(() => {
-      console.log(order)
-   }, [order])
-
    const categories = data?.pages?.flatMap((page) => page?.results ?? []) ?? []
    const loadMoreRef = useRef<HTMLDivElement | null>(null)
    const isInView = useInView(loadMoreRef)

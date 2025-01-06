@@ -1,18 +1,16 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
-import { logCookie } from './app/actions';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function middleware(request: NextRequest,res : NextResponse) {
   const accessToken = request.cookies.get('AccessToken')?.value;
-  logCookie();
   if (request.nextUrl.pathname.startsWith('/auth')) {
     if (accessToken) {
       try {
         await jwtVerify(accessToken, new TextEncoder().encode(JWT_SECRET));
-        return NextResponse.redirect(new URL('/admin', request.url));
+        return NextResponse.redirect(new URL('/admin', request.url ));
       } catch (error) {
         console.error('Token verification failed:', error);
       }

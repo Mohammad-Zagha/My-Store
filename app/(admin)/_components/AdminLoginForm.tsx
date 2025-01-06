@@ -18,7 +18,6 @@ const AdminLoginForm = () => {
       <form
          className="flex w-full flex-col gap-6 max-md:gap-4"
          onSubmit={handleSubmit((data) => {
-            console.log(data)
             loginMutaion.mutateAsync(data)
             //redirect to dashboard
          })}
