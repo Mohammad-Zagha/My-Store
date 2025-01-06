@@ -1,26 +1,11 @@
-import { logCookie } from '@/app/actions'
-import React from 'react'
+import { cookies } from 'next/headers'
 
-// Define the server action
-export const foo = async () => {
-   'use server'
-   logCookie()
-   // You can access cookies or perform other server-side logic here.
-}
-
-const Page = async () => {
-   return (
-      <div>
-         <h1>Server Component</h1>
-         <button
-            onClick={() => {
-               foo()
-            }}
-         >
-            Log Cookie
-         </button>
+export default async function Page() {
+   const cookieStore = await cookies()
+   return cookieStore.getAll().map((cookie) => (
+      <div key={cookie.name}>
+         <p>Name: {cookie.name}</p>
+         <p>Value: {cookie.value}</p>
       </div>
-   )
+   ))
 }
-
-export default Page
