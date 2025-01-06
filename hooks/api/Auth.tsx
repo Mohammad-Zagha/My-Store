@@ -9,7 +9,16 @@ export const useAdminLogin = () => {
 
    return useMutation({
       mutationFn: async ({ email, password }: { email: string; password: string }) => {
-         const { data } = await axiosInstance.post('/admin/signin/', { email, password })
+         const { data } = await axiosInstance.post(
+            '/admin/signin/',
+            { email, password },
+            {
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               withCredentials: true,
+            },
+         )
          return data
       },
       async onSuccess() {
