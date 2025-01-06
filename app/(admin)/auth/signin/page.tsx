@@ -1,3 +1,4 @@
+'use client'
 import AnimatedLink from '@/components/animated/AnimatedLink'
 import React from 'react'
 import AdminLoginForm from '../../_components/AdminLoginForm'

@@ -15,7 +15,6 @@ export function EditDeliveryAddressDialog({ address }: { address: T_DeliveryAddr
    const { mutate: updateAddressMutation, isPending } = useUpdateDeliveryAddress()
    const queryClient = useQueryClient()
    const onSubmit = (data: T_DeliveryAddress) => {
-      console.log(data)
       trigger()
       updateAddressMutation(
          {

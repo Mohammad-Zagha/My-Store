@@ -21,7 +21,7 @@ export const useAdminLogin = () => {
          )
          return data
       },
-      async onSuccess() {
+      onSuccess() {
          push('/admin')
       },
       onError: (error) => toast.error('حدث خطاء ما الرجاء المحاولة مرة اخرى'),

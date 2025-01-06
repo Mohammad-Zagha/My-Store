@@ -34,7 +34,6 @@ export function useGetCategoryProducts({
       getNextPageParam: (lastPage, allPages) => {
          // Ensure lastPage has a nextPage property
          if (lastPage?.hasNextPage) {
-            console.log(lastPage)
             return lastPage.nextPage
          }
          return undefined // No more pages
@@ -172,7 +171,6 @@ export function useGetDiscountedProducts({ page = 1, limit = 8 }: { page: number
       getNextPageParam: (lastPage, allPages) => {
          // Ensure lastPage has a nextPage property
          if (lastPage?.hasNextPage) {
-            console.log(lastPage)
             return lastPage.nextPage
          }
          return undefined // No more pages
@@ -216,7 +214,6 @@ export function useGetNewProducts({ page = 1, limit = 8 }: { page: number; limit
       getNextPageParam: (lastPage, allPages) => {
          // Ensure lastPage has a nextPage property
          if (lastPage?.hasNextPage) {
-            console.log(lastPage)
             return lastPage.nextPage
          }
          return undefined // No more pages
@@ -242,7 +239,6 @@ export function useGetMostSoldProducts({ page = 1, limit = 8 }: { page: number; 
       getNextPageParam: (lastPage, allPages) => {
          // Ensure lastPage has a nextPage property
          if (lastPage?.hasNextPage) {
-            console.log(lastPage)
             return lastPage.nextPage
          }
          return undefined // No more pages

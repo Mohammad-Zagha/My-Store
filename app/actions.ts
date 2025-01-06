@@ -5,9 +5,4 @@ export async function getCookie(key: string): Promise<string | null> {
     return cookieValue  
  }
 
- export  async function logCookie() {
-    const cookieStore =  cookies()
-    console.log(cookieStore)
-    return
 
- }
