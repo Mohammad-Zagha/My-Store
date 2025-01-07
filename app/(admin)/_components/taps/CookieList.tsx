@@ -1,20 +1,18 @@
 'use client'
-import { getCookie } from '@/app/actions'
+import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 
 const CookiesList = () => {
    const [cookies, setCookies] = useState<{ key: string; value: string }[]>([])
 
    useEffect(() => {
-      const fetchCookies = async () => {
-         const keys = ['AccessToken', 'connect.id'] // Replace with the cookie keys you want to retrieve.
-         const fetchedCookies = await Promise.all(
-            keys.map(async (key) => {
-               const value = await getCookie(key)
-               return { key, value: value || 'Not Found' }
-            }),
-         )
-         setCookies(fetchedCookies)
+      const fetchCookies = () => {
+         const allCookies = Cookies.get() // Get all cookies as an object
+         const formattedCookies = Object.entries(allCookies).map(([key, value]) => ({
+            key,
+            value: value || 'Not Found',
+         }))
+         setCookies(formattedCookies)
       }
 
       fetchCookies()
@@ -24,7 +22,7 @@ const CookiesList = () => {
       <div className="p-4">
          <h2 className="text-lg font-semibold mb-4">Browser Cookies</h2>
          {cookies.length === 0 ? (
-            <p>Loading cookies...</p>
+            <p>No cookies found.</p>
          ) : (
             <ul className="list-disc pl-5">
                {cookies.map((cookie, index) => (
