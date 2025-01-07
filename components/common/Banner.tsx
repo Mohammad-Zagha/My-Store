@@ -104,13 +104,13 @@ const Banner = ({ banner }: { banner: T_Banner }) => {
          <div className="col-span-1 flex flex-col justify-center gap-4 text-white/90" dir="rtl">
             <div className="flex flex-col gap-4 max-md:bg-black/15 p-2 rounded-lg max-md:backdrop-blur-sm   ">
                <div className="flex gap-2 font-Inter text-2xl md:text-4xl font-bold pl-2 animate-text">
-                  {/* <span className="font-extralight text-xl md:text-3xl font-Cairo">فيرزاتشي</span>
+                  {/* <span className="font-extralight text-xl md:text-3xl ">فيرزاتشي</span>
                   <span className="font-SFPro">X</span>
-                  <span className="font-Cairo">بيور فيمي</span> */}
+                  <span className="">بيور فيمي</span> */}
                   {banner.arabicName}
                </div>
                <div className="max-w-full md:max-w-[300px] h-full animate-text  ">
-                  {/* <span className="text-sm md:text-lg font-Cairo text-white/60 max-md:text-white break-words">
+                  {/* <span className="text-sm md:text-lg  text-white/60 max-md:text-white break-words">
                      عطر فيرزاتشي بور فام هو رمز للأنوثة والأناقة. بتركيبته الفريدة من الزهور والفواكه، يضفي لمسة من
                      الجاذبية تدوم طوال اليوم. اختيار مثالي لكل امرأة تعشق التميز والبساطة في آن واحد.
                   </span> */}

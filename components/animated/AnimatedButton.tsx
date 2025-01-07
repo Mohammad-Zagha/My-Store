@@ -54,7 +54,7 @@ const AnimatedButton = ({ onClick, className, children, ...props }: T_AnimatedBu
          onClick={onClick}
          {...props}
          className={cn(
-            'bg-transparent hover:bg-transparent relative font-Cairo text-lg max-md:text-sm font-bold text-primary-dark/75 w-fit',
+            'bg-transparent hover:bg-transparent relative  text-lg max-md:text-sm font-bold text-primary-dark/75 w-fit',
             className,
          )}
       >

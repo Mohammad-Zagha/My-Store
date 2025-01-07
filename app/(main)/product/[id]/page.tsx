@@ -67,26 +67,26 @@ const Page = () => {
             <div className="col-span-10  rounded-xl flex gap-10 justify-center items-center p-6 max-lg:col-span-full max-md:flex-col-reverse">
                <div className="flex flex-col  gap-6 max-md:gap-3 max-md:w-full">
                   <Stars rating={3} num_of_ratings={300} />
-                  <span className="text-lg font-Cairo font-bold">{data?.name}</span>
+                  <span className="text-lg  font-bold">{data?.name}</span>
                   <div className="flex gap-2 justify-start items-center ">
                      <span
                         className={cn(
-                           'text-lg font-Cairo font-bold',
+                           'text-lg  font-bold',
                            data?.discount ? 'line-through text-primary-light text-sm' : 'text-primary-dark',
                         )}
                      >
                         {data?.price} ₪
                      </span>
                      {data && data.discount > 0 && (
-                        <span className="leading-3  font-Cairo text-lg font-semibold text-primary-dark">
+                        <span className="leading-3   text-lg font-semibold text-primary-dark">
                            {data?.price - data?.discount} ₪
                         </span>
                      )}
                   </div>
-                  <span className="text-sm font-Cairo max-w-[500px] text-primary-light ">{data?.description}</span>
+                  <span className="text-sm  max-w-[500px] text-primary-light ">{data?.description}</span>
                   {data && data.category && (
                      <div className="flex gap-2 justify-start items-center">
-                        <span className="font-Cairo text-sm font-semibold">التصنيف : </span>
+                        <span className=" text-sm font-semibold">التصنيف : </span>
                         <AnimatedLink
                            href={`/categories/products/${data?.category.id}`}
                            className=" text-sm"
@@ -95,8 +95,8 @@ const Page = () => {
                      </div>
                   )}
                   <div className="flex gap-2 justify-start items-center ">
-                     <span className="font-Cairo text-sm font-semibold">متوفر في المخزن : </span>
-                     <span className="text-sm font-Cairo text-primary-dark font-bold">{data?.stock}</span>
+                     <span className=" text-sm font-semibold">متوفر في المخزن : </span>
+                     <span className="text-sm  text-primary-dark font-bold">{data?.stock}</span>
                   </div>
                   <div className="flex justify-between items-center w-full">
                      <div className="   grid grid-cols-3 gap-4 ">
@@ -165,14 +165,14 @@ const Page = () => {
                fill
                className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-300"
             />
-            <span className="text-white font-Cairo font-bold text-3xl absolute bottom-4 w-full text-center ">
+            <span className="text-white  font-bold text-3xl absolute bottom-4 w-full text-center ">
                عروض
                <br />
                خاصة
             </span>
          </div>
          <div className="col-span-full  grid grid-rows-[auto_minmax(0,1fr)]">
-            <div className="w-full font-Cairo font-bold text-4xl  text-primary-dark text-center">منتجات مشابهة</div>
+            <div className="w-full  font-bold text-4xl  text-primary-dark text-center">منتجات مشابهة</div>
             <motion.div
                dir="rtl"
                className="h-[90%] w-full p-2 gap-4 rounded-lg grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-[auto_minmax(400px,1fr)]"

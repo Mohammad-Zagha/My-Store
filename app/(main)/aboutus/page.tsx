@@ -43,7 +43,7 @@ const Page = () => {
    //                   <h1 className="fade-in text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl font-SFPro">
    //                      قصتنا
    //                   </h1>
-   //                   <h2 className="fade-in text-white text-sm  leading-normal font-Cairo font-bold md:text-lg">
+   //                   <h2 className="fade-in text-white text-sm  leading-normal  font-bold md:text-lg">
    //                      نؤمن بأن العطر هو أداة قوية للتعبير عن الذات، وأنه ينبغي للجميع الحرية في استكشافه والاستمتاع
    //                      به. لهذا السبب نحن في مهمة لجعل العطور الفاخرة أكثر قابلية للوصول. من خلال مجموعتنا المختارة
    //                      بعناية إلى برنامج العينات المبتكر لدينا، كل ما نقوم به مصمم لمساعدتك على اكتشاف عطرك المميز

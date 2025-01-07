@@ -21,19 +21,17 @@ const Orders = () => {
          {
             header: 'الاسم',
             accessorKey: 'name',
-            cell: ({ row }) => (
-               <span className="font-Cairo text-sm font-semibold text-nowrap">{row.original.name}</span>
-            ),
+            cell: ({ row }) => <span className=" text-sm font-semibold text-nowrap">{row.original.name}</span>,
          },
          {
             header: 'المدينة',
             accessorKey: 'city',
-            cell: ({ row }) => <span className="font-Cairo text-sm font-semibold">{row.original.city}</span>,
+            cell: ({ row }) => <span className=" text-sm font-semibold">{row.original.city}</span>,
          },
          {
             header: 'رقم الهاتف',
             accessorKey: 'phone',
-            cell: ({ row }) => <span className="font-Cairo text-sm font-semibold">{row.original.phone}</span>,
+            cell: ({ row }) => <span className=" text-sm font-semibold">{row.original.phone}</span>,
          },
          {
             header: 'الحالة',
@@ -44,7 +42,7 @@ const Orders = () => {
             header: 'التاريخ',
             accessorKey: 'created_at',
             cell: ({ row }) => (
-               <span className="font-Cairo text-sm font-semibold text-nowrap">
+               <span className=" text-sm font-semibold text-nowrap">
                   {formatUTCDateToLocalTime(row.original.createdAt).date}
                </span>
             ),
@@ -52,9 +50,7 @@ const Orders = () => {
          {
             header: 'السعر الكلي',
             accessorKey: 'total',
-            cell: ({ row }) => (
-               <span className="font-Cairo text-sm font-semibold">{row.original.totalAmount.toFixed(2)}</span>
-            ),
+            cell: ({ row }) => <span className=" text-sm font-semibold">{row.original.totalAmount.toFixed(2)}</span>,
          },
       ],
       [],
@@ -106,7 +102,7 @@ function StatusRow({ status }: { status: string }) {
    return (
       <div className="flex items-center gap-2">
          <div className={`size-2 rounded-full mt-1 ${color}`} />
-         <span className="font-Cairo text-sm font-semibold">{label}</span>
+         <span className=" text-sm font-semibold">{label}</span>
       </div>
    )
 }
@@ -115,30 +111,30 @@ function RenderAccordion({ row }: { row: T_Admin_Order }) {
    return (
       <div className="w-full p-2 grid grid-cols-4 gap-y-3 max-md:grid-cols-2">
          <div className="col-span-1 flex flex-col gap-2 ">
-            <h4 className="font-Cairo text-primary-light border-b pb-1">تفاصيل الطلب</h4>
-            <div className="flex items-center gap-2 font-Cairo text-xs font-semibold">
+            <h4 className=" text-primary-light border-b pb-1">تفاصيل الطلب</h4>
+            <div className="flex items-center gap-2  text-xs font-semibold">
                <span className=""> السعر قبل الخصومات :</span>
                <span>{row.initialAmount.toFixed(2)}</span>
             </div>
-            <div className="flex items-center gap-2 font-Cairo text-xs font-semibold">
+            <div className="flex items-center gap-2  text-xs font-semibold">
                <span className=""> السعر بعد الخصومات :</span>
                <span className=" text-sm">{row.totalAmount.toFixed(2)}</span>
             </div>
          </div>
          <div className="col-span-1 flex flex-col gap-2">
-            <h4 className="font-Cairo text-primary-light border-b pb-1">تفاصيل الخصومات</h4>
-            <div className="flex items-center gap-2 font-Cairo text-xs font-semibold">
+            <h4 className=" text-primary-light border-b pb-1">تفاصيل الخصومات</h4>
+            <div className="flex items-center gap-2  text-xs font-semibold">
                <span className=""> عدد الاصناف مع خصم :</span>
                <span>{row.numberOfOfferItems}</span>
             </div>
-            <div className="flex items-center gap-2 font-Cairo text-xs font-semibold">
+            <div className="flex items-center gap-2  text-xs font-semibold">
                <span className=""> مجموع الخصومات :</span>
                <span className=" text-sm">{row.totalDiscountAmount}</span>
             </div>
          </div>
          <div className="col-span-2 flex flex-col gap-2">
-            <h4 className="font-Cairo text-primary-light border-b pb-1">العنوان </h4>
-            <span className="font-Cairo text-xs font-semibold">{row.address}</span>
+            <h4 className=" text-primary-light border-b pb-1">العنوان </h4>
+            <span className=" text-xs font-semibold">{row.address}</span>
          </div>
       </div>
    )
@@ -159,7 +155,7 @@ function RenderDialog({ row }: { row: T_Admin_Order }) {
          >
             {/* Header */}
             <div className="w-full flex justify-between items-center pl-8">
-               <span className="font-Cairo text-sm font-semibold text-primary-dark">منتجات الطلبية</span>
+               <span className=" text-sm font-semibold text-primary-dark">منتجات الطلبية</span>
                <StatusRow status={row.status} />
             </div>
 
@@ -232,11 +228,11 @@ function RenderDialog({ row }: { row: T_Admin_Order }) {
                   </Button>
                </div>
                <div className="flex flex-col items-start  h-full leading-1 ">
-                  <span className="font-Cairo font-semibold text-primary-dark/80 ">₪ {row.deliveryCost} +</span>
-                  <span className="font-Cairo font-semibold text-primary-dark/80 border-b border-gray-700">
+                  <span className=" font-semibold text-primary-dark/80 ">₪ {row.deliveryCost} +</span>
+                  <span className=" font-semibold text-primary-dark/80 border-b border-gray-700">
                      ₪ {row.totalAmount.toFixed(2)}
                   </span>
-                  <span className="font-Cairo text-lg font-semibold text-primary-dark ">
+                  <span className=" text-lg font-semibold text-primary-dark ">
                      ₪ {row.deliveryCost + row.totalAmount}
                   </span>
                </div>

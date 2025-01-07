@@ -43,14 +43,14 @@ function AdminProductDiscountCard({ product }: { product: T_Product }) {
          <div className="w-full flex justify-between items-center gap-2 px-2">
             <span
                className={cn(
-                  'font-extrabold text-lg font-Cairo text-primary-dark',
+                  'font-extrabold text-lg  text-primary-dark',
                   product?.discount !== 0 && 'line-through text-primary-dark/50 text-sm decoration-[1px] ',
                )}
             >
                ₪ {product?.price ?? 'N/A'}
             </span>
             {product?.discount ? (
-               <span className={cn('font-extrabold text-lg font-Cairo text-primary-dark')}>
+               <span className={cn('font-extrabold text-lg  text-primary-dark')}>
                   ₪ {(product.price - product.discount).toFixed(2)}
                </span>
             ) : null}
@@ -61,7 +61,7 @@ function AdminProductDiscountCard({ product }: { product: T_Product }) {
             alt={product.name}
             className="rounded-[30px] shadow-sm object-cover aspect-auto h-[250px] w-full hover:scale-105 transition-transform duration-300"
          />
-         <span className="line-clamp-1 font-Cairo text-sm font-semibold text-primary-dark">{product.name}</span>
+         <span className="line-clamp-1  text-sm font-semibold text-primary-dark">{product.name}</span>
          <div className="w-full flex justify-between items-center p-2">
             <Dialog>
                <DialogTrigger asChild>

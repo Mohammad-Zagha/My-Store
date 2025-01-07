@@ -48,14 +48,14 @@ const TodaysOffers = () => {
             className="col-span-9 max-md:col-span-full overflow-y-auto grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 p-3 grid-rows-[auto_minmax(400px,1fr)]"
          >
             <div className=" col-span-full h-auto flex justify-between items-end">
-               <h1 className="text-primary-dark font-Cairo text-lg">تعرف على عروض اليوم</h1>
-               <span className="text-sm font-Cairo text-primary-light inline-block max-md:hidden">
+               <h1 className="text-primary-dark  text-lg">تعرف على عروض اليوم</h1>
+               <span className="text-sm  text-primary-light inline-block max-md:hidden">
                   مع عروض متجري اليومية و المتجددة
                   <span className="inline-block min-w-[5em] text-start">
                      <FlipWords words={['وفر', 'اجمع', 'استمتع']} />
                   </span>
                </span>
-               <AnimatedLink title="مشاهدة الكل" href="/offers" className="font-Cairo font-bold text-sm" />
+               <AnimatedLink title="مشاهدة الكل" href="/offers" className=" font-bold text-sm" />
             </div>
             {isLoading ? (
                <>

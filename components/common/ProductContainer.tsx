@@ -90,9 +90,7 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
          />
 
          <div className="grid grid-cols-2 h-full">
-            <span className="text-primary-dark text-center font-Cairo col-span-full font-500  text-sm text-wrap ">
-               {title}
-            </span>
+            <span className="text-primary-dark text-center  col-span-full font-500  text-sm text-wrap ">{title}</span>
 
             <div ref={priceRef} className="text-primary-dark text-xl flex items-center gap-1 w-fit col-span-full">
                {price}
@@ -102,7 +100,7 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
             <Link
                ref={buttonRef}
                href={`/product/${productid}`}
-               className="text-primary-dark flex justify-start col-span-full font-Cairo bg-transparent hover:bg-transparent h-fit p-0 text-sm font-semibold opacity-0 transition-opacity"
+               className="text-primary-dark flex justify-start col-span-full  bg-transparent hover:bg-transparent h-fit p-0 text-sm font-semibold opacity-0 transition-opacity"
             >
                اضافة الى السلة
             </Link>

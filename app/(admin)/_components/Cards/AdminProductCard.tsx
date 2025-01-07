@@ -34,8 +34,8 @@ export function AdminProductCard({ product }: { product: T_Product }) {
                />
             </div>
          </div>
-         <div className="h-full w-full flex flex-col gap-2  pt-2  font-Cairo text-sm font-semibold text-primary-dark/80 pb-2 border-b">
-            <span className="font-Cairo text-xs text-primary-dark/70 line-clamp-2 font-normal  min-h-[40px] ">
+         <div className="h-full w-full flex flex-col gap-2  pt-2   text-sm font-semibold text-primary-dark/80 pb-2 border-b">
+            <span className=" text-xs text-primary-dark/70 line-clamp-2 font-normal  min-h-[40px] ">
                {product.description}
             </span>
             <div className="flex justify-between items-center">

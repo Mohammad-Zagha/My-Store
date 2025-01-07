@@ -47,7 +47,7 @@ const Page = () => {
 
    return (
       <div className="min-w-[dvw] min-h-[100dvh] bg-background-light pt-20 flex flex-col p-6 gap-8" dir="rtl">
-         <span className="w-full font-Cairo text-3xl max-sm:text-lg font-semibold text-primary-dark text-center">
+         <span className="w-full  text-3xl max-sm:text-lg font-semibold text-primary-dark text-center">
             جميع القوائم
          </span>
 

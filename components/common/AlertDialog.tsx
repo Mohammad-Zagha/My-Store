@@ -20,7 +20,7 @@ const CustomAlertDialog = ({ ...props }: T_Alert_Dialog) => {
    return (
       <AlertDialog>
          <AlertDialogTrigger asChild>{props.trigger}</AlertDialogTrigger>
-         <AlertDialogContent className="bg-white font-Cairo" dir="rtl">
+         <AlertDialogContent className="bg-white " dir="rtl">
             <AlertDialogHeader>
                <AlertDialogTitle className="text-start">{props.header}</AlertDialogTitle>
                <AlertDialogDescription className="text-start">{props.description}</AlertDialogDescription>

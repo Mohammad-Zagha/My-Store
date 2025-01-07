@@ -38,7 +38,7 @@ const ContactPage = () => {
                   <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl font-SFPro">
                      تواصل معنا
                   </h1>
-                  <p className="text-white text-sm font-Cairo font-medium md:text-lg">
+                  <p className="text-white text-sm  font-medium md:text-lg">
                      نحن هنا للإجابة على جميع استفساراتك. دعنا نعرف كيف يمكننا مساعدتك.
                   </p>
                </div>

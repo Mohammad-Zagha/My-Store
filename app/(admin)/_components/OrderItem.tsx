@@ -17,10 +17,8 @@ const OrderItem = ({ item }: { item: T_Product & { quantity: number } }) => {
             <div className="flex flex-col justify-between p-1">
                <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">{item.name}</span>
 
-               <span className="font-Cairo text-xs text-primary-dark/70 max-w-[250px] line-clamp-2">
-                  {item.description}
-               </span>
-               <div className="font-Cairo text-sm text-primary-dark/70 flex w-fit center gap-2">
+               <span className=" text-xs text-primary-dark/70 max-w-[250px] line-clamp-2">{item.description}</span>
+               <div className=" text-sm text-primary-dark/70 flex w-fit center gap-2">
                   <span>{item.quantity}</span>
                   <span>x</span>
                   <span>₪ {item.price}</span>
@@ -30,14 +28,14 @@ const OrderItem = ({ item }: { item: T_Product & { quantity: number } }) => {
          <div className="flex justify-center items-center flex-col w-fit  ">
             <span
                className={cn(
-                  'font-Cairo text-lg text-primary-dark leading-none',
+                  ' text-lg text-primary-dark leading-none',
                   discountAmount !== item.price ? 'text-gray-400 line-through' : '',
                )}
             >
                ₪ {(item.price * item.quantity).toFixed(2)}
             </span>
             {discountAmount !== item.price && (
-               <span className="font-Cairo text-lg text-primary-dark leading-none">
+               <span className=" text-lg text-primary-dark leading-none">
                   ₪ {((item.price - item.discount) * item.quantity).toFixed(2)}
                </span>
             )}

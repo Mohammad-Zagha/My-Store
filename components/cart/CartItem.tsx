@@ -26,7 +26,7 @@ export const CartItem = ({ cartItem }: { cartItem: T_Product & { quantity: numbe
    return (
       <div className="w-full shadow-card relative  h-fit flex justify-between gap-6 px-5 py-3 rounded-xl " dir="rtl">
          {cartItem.discount > 0 && (
-            <div className="w-fit h-fit font-Cairo text-xs bg-red-500 text-white p-1 absolute top-0 left-0 rounded-tl-xl rounded-b-xl">
+            <div className="w-fit h-fit  text-xs bg-red-500 text-white p-1 absolute top-0 left-0 rounded-tl-xl rounded-b-xl">
                عرض خاص
             </div>
          )}
@@ -40,14 +40,14 @@ export const CartItem = ({ cartItem }: { cartItem: T_Product & { quantity: numbe
             <div className="flex gap-2 justify-start items-center ">
                <span
                   className={cn(
-                     'text-lg font-Cairo font-bold',
+                     'text-lg  font-bold',
                      cartItem?.discount > 0 ? 'line-through text-primary-light text-sm' : 'text-primary-dark',
                   )}
                >
                   {cartItem?.price} ₪
                </span>
                {cartItem && cartItem.discount > 0 && (
-                  <span className="leading-3  font-Cairo text-lg font-semibold text-primary-dark">
+                  <span className="leading-3   text-lg font-semibold text-primary-dark">
                      {(cartItem?.price - cartItem?.discount).toFixed(2)} ₪
                   </span>
                )}
@@ -99,7 +99,7 @@ export const CartPageItem = ({ cartItem }: { cartItem: T_Product & { quantity: n
    return (
       <div className="w-full flex justify-between relative shadow-card  rounded-xl " dir="rtl">
          {cartItem.discount > 0 && (
-            <div className="w-fit h-fit font-Cairo text-xs bg-primary-dark text-white p-1 px-2 absolute top-0 left-4  rounded-b-lg">
+            <div className="w-fit h-fit  text-xs bg-primary-dark text-white p-1 px-2 absolute top-0 left-4  rounded-b-lg">
                عرض خاص
             </div>
          )}
@@ -113,20 +113,18 @@ export const CartPageItem = ({ cartItem }: { cartItem: T_Product & { quantity: n
                <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">
                   {cartItem.name}
                </span>
-               <span className="font-Cairo text-xs text-primary-dark/70 max-w-[250px] line-clamp-2">
-                  {cartItem.description}
-               </span>
+               <span className=" text-xs text-primary-dark/70 max-w-[250px] line-clamp-2">{cartItem.description}</span>
                <div className="flex gap-2 justify-start items-center  ">
                   <span
                      className={cn(
-                        'text-lg font-Cairo font-bold',
+                        'text-lg  font-bold',
                         cartItem?.discount > 0 ? 'line-through text-primary-light text-sm' : 'text-primary-dark',
                      )}
                   >
                      {cartItem?.price} ₪
                   </span>
                   {cartItem && cartItem.discount > 0 && (
-                     <span className="leading-3  font-Cairo text-lg font-semibold text-primary-dark">
+                     <span className="leading-3   text-lg font-semibold text-primary-dark">
                         {(cartItem?.price - cartItem?.discount).toFixed(2)} ₪
                      </span>
                   )}

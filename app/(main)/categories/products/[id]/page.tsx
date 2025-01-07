@@ -82,9 +82,7 @@ const Page = () => {
                      onChange={(e) => setSearch(e.target.value)}
                      className="bg-background-light"
                   />
-                  <span className="text-lg md:text-2xl font-Cairo font-semibold  pt-2 w-full text-center">
-                     {category?.name}
-                  </span>
+                  <span className="text-lg md:text-2xl  font-semibold  pt-2 w-full text-center">{category?.name}</span>
                   <div className="flex justify-end items-center">
                      <ProductOrderFilter order={order} handleSelect={setOrder} />
                   </div>

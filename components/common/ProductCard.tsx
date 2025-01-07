@@ -55,13 +55,13 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
          <Link href="/" className="flex w-full justify-between items-center cursor-pointer" dir="ltr">
             <div className="flex center gap-2 cursor-pointer">
                {product?.discount ? (
-                  <span className={cn('font-extrabold text-lg font-Cairo text-primary-dark')}>
+                  <span className={cn('font-extrabold text-lg  text-primary-dark')}>
                      ₪ {(product.price - product.discount).toFixed(2)}
                   </span>
                ) : null}
                <span
                   className={cn(
-                     'font-extrabold text-lg font-Cairo text-primary-dark',
+                     'font-extrabold text-lg  text-primary-dark',
                      product?.discount !== 0 && 'line-through text-primary-dark/50 text-sm decoration-[1px] ',
                   )}
                >
@@ -69,7 +69,7 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
                </span>
             </div>
             <AnimatedLink
-               className="font-bold text-sm font-Cairo max-w-28 truncate"
+               className="font-bold text-sm  max-w-28 truncate"
                title={product?.category?.name ?? 'N/A'}
                href={`/categories/products/${product?.category.id}`}
             />
@@ -83,7 +83,7 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
             />
          </Link>
 
-         <span className="text-sm font-Cairo text-primary-dark font-semibold text-center h-[100px] overflow-hidden text-ellipsis line-clamp-5">
+         <span className="text-sm  text-primary-dark font-semibold text-center h-[100px] overflow-hidden text-ellipsis line-clamp-5">
             {product?.name ?? 'N/A'}
          </span>
          <div className="w-full flex center">
@@ -103,7 +103,7 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
                >
                   +
                </Button>
-               <span className="text-lg font-bold font-Cairo ">{count}</span>
+               <span className="text-lg font-bold  ">{count}</span>
                <Button
                   className="bg-transparent text-primary-dark px-3 py-1 text-lg hover:bg-transparent"
                   onClick={(prev) => {
@@ -132,7 +132,7 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
                      },
                   )
                }}
-               className="font-Cairo text-xs font-bold bg-background-dark text-primary-dark hover:bg-background-dark px-4 py-1 rounded-xl shadow-md hover:shadow-lg transition"
+               className=" text-xs font-bold bg-background-dark text-primary-dark hover:bg-background-dark px-4 py-1 rounded-xl shadow-md hover:shadow-lg transition"
             >
                اضافة الى السلة
             </Button>

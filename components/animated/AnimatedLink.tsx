@@ -52,7 +52,7 @@ const AnimatedLink = ({ title, href, className, ...props }: T_AnimatedLink) => {
          href={href}
          ref={linkRef}
          {...props}
-         className={cn('relative font-Cairo text-lg max-md:text-sm font-bold text-primary-dark/75 w-fit', className)}
+         className={cn('relative  text-lg max-md:text-sm font-bold text-primary-dark/75 w-fit', className)}
       >
          {title}
          <div ref={lineRef} className="absolute right-0 bottom-0 h-[1px] w-0 bg-primary-dark" />

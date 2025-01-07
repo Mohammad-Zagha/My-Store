@@ -19,7 +19,7 @@ const ProductOrderFilter = ({ order, handleSelect }: T_OrderFilter) => {
          <DropdownMenuTrigger asChild>
             <Button
                variant="default"
-               className="flex w-fit bg-transparent text-primary-dark hover:bg-transparent border-none font-Cairo text-sm leading-3  font-semibold items-center gap-2"
+               className="flex w-fit bg-transparent text-primary-dark hover:bg-transparent border-none  text-sm leading-3  font-semibold items-center gap-2"
             >
                <IoIosArrowDown size={24} className="text-primary-dark" />
 

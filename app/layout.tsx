@@ -1,5 +1,10 @@
 import CacheProvider from '@/lib/Cache'
 import { Toaster } from 'sonner'
+import { Cairo } from 'next/font/google'
+const cairo = Cairo({
+   subsets: ['arabic'],
+   weight: ['400', '600', '700'], // Choose the weights you need
+})
 
 export default function RootLayout({
    children,
@@ -8,7 +13,7 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body>
+         <body className={cairo.className}>
             <CacheProvider>
                {children}
                <Toaster

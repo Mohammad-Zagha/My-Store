@@ -112,7 +112,7 @@ export function AddProductSideSheet() {
             className="!p-2 !px-4 !pt-5 flex flex-col h-full min-w-[40%] max-sm:min-w-full z-50"
             dir="rtl"
          >
-            <SheetHeader className="flex justify-center items-center text-center font-Cairo font-semibold">
+            <SheetHeader className="flex justify-center items-center text-center  font-semibold">
                اضافة منتج
             </SheetHeader>
             <Carousel

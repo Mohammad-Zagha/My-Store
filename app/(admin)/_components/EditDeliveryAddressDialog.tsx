@@ -72,7 +72,7 @@ export function EditDeliveryAddressDialog({ address }: { address: T_DeliveryAddr
                />
                <FullAddButton
                   isLoading={isPending}
-                  className="col-span-full center font-Cairo text-sm"
+                  className="col-span-full center  text-sm"
                   type="submit"
                   icon={<MdModeEdit className="text-white size-5" />}
                >

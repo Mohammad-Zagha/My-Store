@@ -53,7 +53,7 @@ const CatgoryImageContainer = ({ src, title, className }: T_CatgoryImageContaine
          <div ref={overlayRef} className="absolute inset-0 bg-black bg-opacity-15  transition-colors duration-300" />
 
          {/* Title */}
-         <span className="absolute bottom-4 right-4 text-xl max-md:text-lg font-Cairo text-background-light font-bold line-clamp-1">
+         <span className="absolute bottom-4 right-4 text-xl max-md:text-lg  text-background-light font-bold line-clamp-1">
             {title}
          </span>
       </div>

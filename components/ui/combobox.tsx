@@ -62,7 +62,7 @@ export function Combobox(props: ComboboxProps) {
                {value ? options.find((item) => item === value) : placeholder}
                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </PopoverTrigger>
-            <PopoverContent className="w-[--radix-popover-trigger-width] p-0 rounded-lg bg-white font-Cairo" dir="rtl">
+            <PopoverContent className="w-[--radix-popover-trigger-width] p-0 rounded-lg bg-white " dir="rtl">
                <Command className="rounded-[inherit]">
                   <CommandInput placeholder={placeholder} />
                   <CommandList>

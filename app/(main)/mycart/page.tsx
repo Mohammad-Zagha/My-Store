@@ -42,10 +42,8 @@ const Page = () => {
                <>
                   {/* Title Section */}
                   <div className="flex items-center justify-center gap-2 mb-4">
-                     <h2 className="text-primary-dark font-Cairo">السلة خاصتك</h2>
-                     {cart && cart?.items.length > 0 && (
-                        <h2 className="text-primary-dark font-Cairo">({cart?.items.length})</h2>
-                     )}
+                     <h2 className="text-primary-dark ">السلة خاصتك</h2>
+                     {cart && cart?.items.length > 0 && <h2 className="text-primary-dark ">({cart?.items.length})</h2>}
                   </div>
 
                   {/* Cart Items */}
@@ -60,7 +58,7 @@ const Page = () => {
                      ) : (
                         <div className="flex flex-col items-center">
                            <BsFillBagHeartFill size={80} />
-                           <span className="text-lg font-Cairo">السلة فارغة</span>
+                           <span className="text-lg ">السلة فارغة</span>
                            <AnimatedLink href={'/'} className="text-primary-light text-sm" title="تسوق الان" />
                         </div>
                      )}
@@ -68,11 +66,7 @@ const Page = () => {
 
                   {/* Notes Section */}
                   <div className="mt-4">
-                     <TextAreaBox
-                        label="اضف ملاحظاتك"
-                        className="w-full rounded-xl"
-                        labelClassName="font-Cairo font-semibold"
-                     />
+                     <TextAreaBox label="اضف ملاحظاتك" className="w-full rounded-xl" labelClassName=" font-semibold" />
                   </div>
                </>
             )}
@@ -91,24 +85,24 @@ const Page = () => {
             ) : (
                <>
                   <div className="p-6 space-y-4 h-fit text-center">
-                     <h2 className="text-primary-dark font-Cairo ">المجموع</h2>
+                     <h2 className="text-primary-dark  ">المجموع</h2>
                      <div className="flex justify-between items-center gap-2">
-                        <span className="text-primary-dark font-Cairo">المجموع الفرعي</span>
-                        <span className="text-primary-dark font-Cairo">{total} ₪</span>
+                        <span className="text-primary-dark ">المجموع الفرعي</span>
+                        <span className="text-primary-dark ">{total} ₪</span>
                      </div>
                      <div className="flex justify-between items-center gap-2">
-                        <span className="text-primary-dark font-Cairo">الشحن</span>
-                        <span className="text-primary-dark font-Cairo">
+                        <span className="text-primary-dark ">الشحن</span>
+                        <span className="text-primary-dark ">
                            {deliveryAddress ? `${deliveryAddress.cost} ₪` : 'حدد مدينتك'}
                         </span>
                      </div>
                      <div className="flex justify-between items-center gap-2">
-                        <span className="text-primary-dark font-Cairo">الضريبة</span>
-                        <span className="text-primary-dark font-Cairo">00.00 ₪</span>
+                        <span className="text-primary-dark ">الضريبة</span>
+                        <span className="text-primary-dark ">00.00 ₪</span>
                      </div>
                      <div className="flex justify-between items-center gap-2 font-bold">
-                        <span className="text-primary-dark font-Cairo">المجموع الكلي</span>
-                        <span className="text-primary-dark font-Cairo">
+                        <span className="text-primary-dark ">المجموع الكلي</span>
+                        <span className="text-primary-dark ">
                            {deliveryAddress ? `${total + deliveryAddress.cost} ₪` : 'حدد مدينتك'}
                         </span>
                      </div>

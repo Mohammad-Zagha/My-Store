@@ -51,7 +51,7 @@ export function Cart() {
                <div className="h-full flex center w-full">
                   <div className="flex flex-col items-center">
                      <BsFillBagHeartFill size={80} />
-                     <span className="text-lg font-Cairo">السلة فارغة</span>
+                     <span className="text-lg ">السلة فارغة</span>
                      <AnimatedLink
                         href={'/'}
                         className="text-primary-light text-sm"
@@ -62,7 +62,7 @@ export function Cart() {
                </div>
             )}
 
-            <div className="bg-transparent h-fit px-8 py-8 font-Cairo   " dir="rtl">
+            <div className="bg-transparent h-fit px-8 py-8    " dir="rtl">
                <div className="flex justify-between items-center px-4 ">
                   <span className="text-lg font-semibold">المجموع:</span>
                   <span className="text-lg font-semibold">

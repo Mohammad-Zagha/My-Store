@@ -21,9 +21,9 @@ const HomeWomanSection = () => {
 
          <div className="col-span-9 max-md:col-span-full overflow-y-auto grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 p-3 grid-rows-[auto_minmax(400px,1fr)]">
             <div className=" col-span-full h-auto flex justify-between items-end">
-               <h1 className="text-primary-dark font-Cairo  text-lg"> عطور ستاتي 25مل</h1>
+               <h1 className="text-primary-dark   text-lg"> عطور ستاتي 25مل</h1>
 
-               <AnimatedLink title="مشاهدة الكل" href="/offers" className="font-Cairo font-bold text-sm" />
+               <AnimatedLink title="مشاهدة الكل" href="/offers" className=" font-bold text-sm" />
             </div>
             {isLoading ? (
                <>

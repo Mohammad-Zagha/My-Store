@@ -136,7 +136,7 @@ const EditBannerDialog = ({ category }: { category: T_Category }) => {
                            alt="product"
                            className="size-[40px] rounded-lg"
                         />
-                        <span className="font-Cairo text-xs font-semibold text-primary-dark">{item.name}</span>
+                        <span className=" text-xs font-semibold text-primary-dark">{item.name}</span>
                      </div>
                   )}
                />

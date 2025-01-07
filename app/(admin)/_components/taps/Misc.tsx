@@ -45,14 +45,12 @@ function AddressDataTable() {
          {
             header: 'المدينة',
             accessorKey: 'address',
-            cell: ({ row }) => <span className="font-Cairo text-sm font-semibold">{row.original.address}</span>,
+            cell: ({ row }) => <span className=" text-sm font-semibold">{row.original.address}</span>,
          },
          {
             header: 'سعر التوصيل',
             accessorKey: 'cost',
-            cell: ({ row }) => (
-               <div className="font-Cairo text-sm font-semibold  w-[50%] text-center ">{row.original.cost}</div>
-            ),
+            cell: ({ row }) => <div className=" text-sm font-semibold  w-[50%] text-center ">{row.original.cost}</div>,
          },
          {
             header: 'العمليات',
@@ -104,8 +102,8 @@ function AddressDataTable() {
    return (
       <div className=" col-span-full lg:col-span-6 xl:col-span-4  h-full  flex flex-col gap-2 ">
          <div className="flex items-center gap-1">
-            <span className="text-sm font-semibold font-Cairo">المدن و اسعار التوصيل</span>
-            <span className="text-sm font-semibold font-Cairo">
+            <span className="text-sm font-semibold ">المدن و اسعار التوصيل</span>
+            <span className="text-sm font-semibold ">
                {isLoading ? (
                   <Skeleton className="h-5 w-10 rounded-lg bg-background-dark"></Skeleton>
                ) : (
@@ -147,11 +145,7 @@ function AddressDataTable() {
                               type: 'error',
                            }}
                         />
-                        <FullAddButton
-                           className="col-span-full center font-Cairo text-sm"
-                           type="submit"
-                           isLoading={isPending}
-                        >
+                        <FullAddButton className="col-span-full center  text-sm" type="submit" isLoading={isPending}>
                            اضافة عنوان
                         </FullAddButton>
                      </form>

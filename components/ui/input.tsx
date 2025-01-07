@@ -128,7 +128,7 @@ const InputBox = React.forwardRef<HTMLInputElement, TInputBox>(
                <InputLabel
                   htmlFor={id}
                   isRequired={isRequired}
-                  className={cn('font-Cairo text-sm font-semibold', lableClassName)}
+                  className={cn(' text-sm font-semibold', lableClassName)}
                >
                   {label}
                </InputLabel>
@@ -142,7 +142,7 @@ const InputBox = React.forwardRef<HTMLInputElement, TInputBox>(
                containerClassName="peer"
                {...props}
             />
-            {instruction && <Instruction {...instruction} className="text-[8px] font-Cairo font-semibold" />}
+            {instruction && <Instruction {...instruction} className="text-[8px]  font-semibold" />}
          </div>
       )
    },

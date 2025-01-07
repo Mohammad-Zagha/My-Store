@@ -18,7 +18,7 @@ const TextAreaBox = forwardRef<HTMLTextAreaElement, TextAreaBoxProps>(
                </InputLabel>
             )}
             <Textarea ref={ref} placeholder={placeholder} rows={4} {...props} />
-            {instructions && <Instruction {...instructions} className="text-[8px] font-Cairo font-semibold" />}
+            {instructions && <Instruction {...instructions} className="text-[8px]  font-semibold" />}
          </div>
       )
    },
