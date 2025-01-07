@@ -1,10 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import Cookies from 'js-cookie';
 import { jwtVerify } from 'jose';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function middleware(request: NextRequest,res : NextResponse) {
+  const allCookies = Cookies.get() // Get all cookies as an object
+  console.log("################# Cookies",allCookies)
   // const accessToken = request.cookies.get('AccessToken')?.value;
   // if (request.nextUrl.pathname.startsWith('/auth')) {
   //   if (accessToken) {
