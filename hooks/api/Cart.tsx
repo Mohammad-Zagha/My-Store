@@ -38,7 +38,6 @@ export function useAddToCart() {
    const queryClient = useQueryClient()
    return useMutation({
       mutationFn: async ({ product, quantity = 1 }: { product: T_Product; quantity: number }) => {
-         console.log(product)
          const { data } = await axiosInstance.post<T_Add_To_Cart_Response>('/cart/add-to-cart/', {
             productId: product.productId,
             quantity,

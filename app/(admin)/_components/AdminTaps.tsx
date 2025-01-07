@@ -7,12 +7,14 @@ import Categories from './taps/Categories'
 import Products from './taps/Products'
 import Offers from './taps/Offers'
 import Misc from './taps/Misc'
+import CookiesList from './taps/CookieList'
 
 const AdminTaps = () => {
    const { value: activeTab, setValue: setActiveTab } = useParamsValues({
       paramKey: 'active-tab',
       defaultValue: 'orders',
    })
+
    return (
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} className="overflow-y-auto gap-0 w-dvw h-dvh">
          <TabsList>
@@ -21,6 +23,7 @@ const AdminTaps = () => {
             <TabsTrigger value="categories">التصنيفات</TabsTrigger>
             <TabsTrigger value="orders">الطلبات</TabsTrigger>
             <TabsTrigger value="Misc">القوائم و الاعدادات</TabsTrigger>
+            <TabsTrigger value="cookies"> cookies</TabsTrigger>
          </TabsList>
 
          <div className="overflow-y-auto">
@@ -38,6 +41,9 @@ const AdminTaps = () => {
             </TabsContent>
             <TabsContent value="Misc" className="h-full ">
                <Misc />
+            </TabsContent>
+            <TabsContent value="cookies" className="h-full ">
+               <CookiesList />
             </TabsContent>
          </div>
       </Tabs>
