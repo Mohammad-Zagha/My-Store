@@ -1,9 +1,11 @@
 'use client'
+import { useGetAllOrders } from '@/hooks/api/Admin'
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 
 const CookiesList = () => {
    const [cookies, setCookies] = useState<{ key: string; value: string }[]>([])
+   const { data: orders, isLoading } = useGetAllOrders()
 
    useEffect(() => {
       const fetchCookies = () => {
