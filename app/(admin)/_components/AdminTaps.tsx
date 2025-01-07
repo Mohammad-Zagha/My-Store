@@ -8,14 +8,11 @@ import Products from './taps/Products'
 import Offers from './taps/Offers'
 import Misc from './taps/Misc'
 import CookiesList from './taps/CookieList'
-import Cookies from 'js-cookie'
 const AdminTaps = () => {
    const { value: activeTab, setValue: setActiveTab } = useParamsValues({
       paramKey: 'active-tab',
       defaultValue: 'orders',
    })
-   const AccessToken = Cookies.get('AccessToken')
-   console.log(AccessToken)
 
    return (
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} className="overflow-y-auto gap-0 w-dvw h-dvh">

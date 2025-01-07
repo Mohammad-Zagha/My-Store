@@ -1,15 +1,14 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import Cookies from 'js-cookie';
-import { jwtVerify } from 'jose';
-import { decodeToken } from './app/actions';
+import { getCookie, setCookie, deleteCookie, hasCookie, getCookies } from 'cookies-next';
+
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-export async function middleware(request: NextRequest,res : NextResponse) {
-  const decode  = await decodeToken()
+export async function middleware(request: NextRequest) {
+  const res = NextResponse.next();
+ const accessToken = await getCookie('AccessToken');
   
-  console.log("decode:", decode);
   // const accessToken = request.cookies.get('AccessToken')?.value;
   // if (request.nextUrl.pathname.startsWith('/auth')) {
   //   if (accessToken) {
