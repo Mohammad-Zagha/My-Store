@@ -6,10 +6,11 @@ import { jwtVerify } from 'jose';
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function middleware(request: NextRequest,res : NextResponse) {
-  const allCookies = request.cookies;
-
-  // Log all cookies
-  console.log("################# Cookies", Object.fromEntries(allCookies));
+  const cookies = Object.fromEntries(request.cookies); // Retrieve cookies
+  const headers = Object.fromEntries(request.headers); // Retrieve headers
+  
+  console.log("Headers:", headers);
+  console.log("Cookies:", cookies);
   // const accessToken = request.cookies.get('AccessToken')?.value;
   // if (request.nextUrl.pathname.startsWith('/auth')) {
   //   if (accessToken) {
