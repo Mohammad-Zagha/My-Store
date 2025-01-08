@@ -11,6 +11,7 @@ import AnimatedLink from '../animated/AnimatedLink'
 import { CartItem } from './CartItem'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import { IoCartOutline } from 'react-icons/io5'
 
 export function Cart() {
    const { data: cart, isLoading } = useGetCart()
@@ -22,8 +23,24 @@ export function Cart() {
                variant="default"
                className="flex center  gap-1 relative size-8 !p-0 bg-transparent hover:bg-transparent text-primary-dark font-bold"
             >
-               السلة
-               {isLoading ? <Skeleton className="w-8 h-2" /> : cart && <span>({cart.items.length})</span>}
+               {isLoading ? (
+                  <Skeleton className="w-8 h-2" />
+               ) : (
+                  <div className="w-fit flex center gap-2 relative">
+                     <div className="rounded-full absolute bg-red-500 text-white text-[8px] flex center p-2 size-2 -right-3 -top-1">
+                        {cart && cart.items.length > 0 ? cart.items.length : 0}
+                     </div>
+                     <IoCartOutline className="text-xl font-bold" />
+                     <span className="text-sm font-semibold">
+                        ₪
+                        {cart && cart.items.length > 0
+                           ? cart.items
+                                .reduce((acc, item) => acc + (item.price - item.discount) * item.quantity, 0)
+                                .toFixed(1)
+                           : 50000}
+                     </span>
+                  </div>
+               )}
             </Button>
          </SheetTrigger>
 
