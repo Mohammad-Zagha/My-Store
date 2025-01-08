@@ -48,7 +48,7 @@ export default function Home() {
          </div>
          <div className="h-full col-span-full  p-6   bg-background-light grid-rows-[auto_minmax(0,1fr)] ">
             <StatsSection />
-            <CatgoryCarousel />
+            {/* <CatgoryCarousel /> */}
             <NewArrivalsCarousel />
          </div>
 

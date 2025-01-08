@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import Link from 'next/link'
 import CustomAvatar from '../ui/ImageHandler'
+import AnimatedLink from '../animated/AnimatedLink'
 
 type T_ImageContainer = {
    src: string
@@ -45,11 +46,9 @@ const ImageContainer = ({ src, title, description, href }: T_ImageContainer) => 
          />
 
          <div className="space-y-0.25r">
-            <span className="text-primary-dark font-SFPro text-xl"> {title}</span>
-            <p className="text-primary-light max-w-[300px]">{description}</p>
-            <Link className="text-primary-dark font-SFPro text-sm font-semibold" href={href}>
-               جميع المنتجات
-            </Link>
+            <span className="text-primary-dark  text-lg font-semibold"> {title}</span>
+            <p className="text-primary-light max-w-[300px] text-xs">{description}</p>
+            <AnimatedLink className="text-primary-dark  text-sm font-semibold" href={href} title=" جميع المنتجات" />
          </div>
       </div>
    )

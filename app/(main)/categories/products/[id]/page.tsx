@@ -7,7 +7,7 @@ import ProductOrderFilter from '@/components/common/ProductOrderFilter'
 import { useGetCategoryProducts } from '@/hooks/api/Products'
 import { useParams } from 'next/navigation'
 import React, { useRef, useEffect, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
 import usePagination from '@/hooks/Pagination'
 import { ProductCardSkeleton, Skeleton } from '@/components/ui/Skeletons'
 import { useGetCategoryById } from '@/hooks/api/Categories'
@@ -58,49 +58,62 @@ const Page = () => {
       }
    }, [isInView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
+   const categoryVariants = {
+      hidden: { opacity: 0, y: 50 }, // Start with opacity 0 and slide in from below
+      visible: { opacity: 1, y: 0 }, // End with opacity 1 and at original position
+   }
+
+   const containerVariants = {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1, transition: { staggerChildren: 0.1 } }, // Stagger children animations
+   }
    return (
-      <div className="h-full w-[dvw] bg-transparent ">
-         {category?.banner && <Banner banner={category?.banner} />}
-         <div
-            className={cn(
-               'w-full h-full bg-background-dark grid grid-rows-[auto_minmax(0,1fr)] gap-2 pt-6  px-4 md:px-12',
-               !category?.banner ? 'pt-20' : 'pt-10',
-            )}
-         >
+      <div className="min-w-[dvw] min-h-[100dvh] bg-background-dark pt-20 flex flex-col p-6 gap-8" dir="rtl">
+         <span className="w-full  text-3xl max-sm:text-lg font-semibold text-primary-dark text-center">
+            {category?.name}
+         </span>
+
+         <div className="w-full md:w-4/5 min-h-screen h-full flex flex-col gap-4 mt-4 mx-auto">
+            <div className="col-span-full flex justify-between items-center ">
+               <Input
+                  type="text"
+                  placeholder="ابحث عن منتج ..."
+                  containerClassName="w-1/3 max-sm:w-full"
+                  className="bg-white"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+               />
+               <ProductOrderFilter order={order} handleSelect={setOrder} /> {/* Order filter */}
+            </div>
+
+            {/* Animate categories */}
             <motion.div
-               dir="rtl"
-               className="w-full md:w-4/5 mx-auto p-2 gap-2  rounded-lg grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-[auto_minmax(400px,1fr)]"
-               variants={staggerContainer}
+               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+               variants={containerVariants}
                initial="hidden"
-               animate="show"
+               animate="visible"
+               exit="hidden"
             >
-               <div className="col-span-full grid grid-cols-3  ">
-                  <Input
-                     placeholder="ابحث عن منتج"
-                     containerClassName="w-full"
-                     disabled={isLoading}
-                     onChange={(e) => setSearch(e.target.value)}
-                     className="bg-background-light"
-                  />
-                  <span className="text-lg md:text-2xl  font-semibold  pt-2 w-full text-center">{category?.name}</span>
-                  <div className="flex justify-end items-center">
-                     <ProductOrderFilter order={order} handleSelect={setOrder} />
-                  </div>
-               </div>
-               {products.length > 0 ? (
-                  products.map((product) => (
-                     <motion.div key={product.productId} variants={cardAnimation} className="min-h-[400px] flex">
+               <AnimatePresence>
+                  {products.map((product) => (
+                     <motion.div
+                        key={product.productId}
+                        className="w-full"
+                        variants={categoryVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit={{ opacity: 0, scale: 0.9 }} // Add exit animation
+                     >
                         <ProductCard product={product} />
                      </motion.div>
-                  ))
-               ) : (
-                  <div className="col-span-full text-center text-gray-500">No products found</div>
-               )}
-               <div ref={loadMoreRef} className="h-[200px] col-span-full flex justify-center items-center">
+                  ))}
+               </AnimatePresence>
+               <div ref={loadMoreRef} className="h-[100px] col-span-full flex justify-center items-center ">
                   {isFetchingNextPage && <ApiLoader />}
                </div>
             </motion.div>
          </div>
+         <div ref={loadMoreRef} />
       </div>
    )
 }

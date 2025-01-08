@@ -52,28 +52,13 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
          )}
       >
          {/* Title & Image */}
-         <Link href="/" className="flex w-full justify-between items-center cursor-pointer" dir="ltr">
-            <div className="flex center gap-2 cursor-pointer">
-               {product?.discount ? (
-                  <span className={cn('font-extrabold text-lg  text-primary-dark')}>
-                     ₪ {(product.price - product.discount).toFixed(2)}
-                  </span>
-               ) : null}
-               <span
-                  className={cn(
-                     'font-extrabold text-lg  text-primary-dark',
-                     product?.discount !== 0 && 'line-through text-primary-dark/50 text-sm decoration-[1px] ',
-                  )}
-               >
-                  ₪ {product?.price ?? 'N/A'}
-               </span>
-            </div>
+         <div className="flex w-full  center cursor-pointer" dir="ltr">
             <AnimatedLink
                className="font-bold text-sm  max-w-28 truncate"
                title={product?.category?.name ?? 'N/A'}
                href={`/categories/products/${product?.category.id}`}
             />
-         </Link>
+         </div>
 
          <Link href={`/product/${product.productId}`} className="w-full h-[220px]  ">
             <CustomAvatar
@@ -83,11 +68,23 @@ const ProductCard = ({ className, product }: T_ProductCard) => {
             />
          </Link>
 
-         <span className="text-sm  text-primary-dark font-semibold text-center h-[100px] overflow-hidden text-ellipsis line-clamp-5">
+         <span className="text-sm  text-primary-dark font-semibold text-center h-[100px] overflow-hidden text-ellipsis line-clamp-3">
             {product?.name ?? 'N/A'}
          </span>
-         <div className="w-full flex center">
-            <Stars rating={4} className="text-primary-dark" num_of_ratings={100} size="0.5rem" />
+         <div className="flex center gap-2 cursor-pointer" dir="ltr">
+            {product?.discount ? (
+               <span className={cn('font-extrabold text-lg  text-primary-dark')}>
+                  ₪ {(product.price - product.discount).toFixed(2)}
+               </span>
+            ) : null}
+            <span
+               className={cn(
+                  'font-extrabold text-lg  text-primary-dark',
+                  product?.discount !== 0 && 'line-through text-primary-dark/50 text-sm decoration-[1px] ',
+               )}
+            >
+               ₪ {product?.price ?? 'N/A'}
+            </span>
          </div>
          {/* Hover Sheet */}
          <div

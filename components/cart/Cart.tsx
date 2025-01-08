@@ -11,6 +11,7 @@ import AnimatedLink from '../animated/AnimatedLink'
 import { CartItem } from './CartItem'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+
 export function Cart() {
    const { data: cart, isLoading } = useGetCart()
    const [open, setOpen] = React.useState(false)
@@ -19,7 +20,7 @@ export function Cart() {
          <SheetTrigger asChild>
             <Button
                variant="default"
-               className="flex center gap-1 !p-0 h-fit bg-transparent hover:bg-transparent text-primary-dark"
+               className="flex center  gap-1 relative size-8 !p-0 bg-transparent hover:bg-transparent text-primary-dark font-bold"
             >
                السلة
                {isLoading ? <Skeleton className="w-8 h-2" /> : cart && <span>({cart.items.length})</span>}
@@ -31,7 +32,7 @@ export function Cart() {
 
             {/* Scrollable Cart Items Section */}
             {cart && cart.items.length > 0 ? (
-               <div className="flex-1 overflow-y-auto gap-2 flex flex-col px-4 gap-4">
+               <div className="flex-1 overflow-y-auto flex flex-col px-4 gap-4">
                   <AnimatePresence>
                      {cart?.items.map((item) => (
                         <motion.div

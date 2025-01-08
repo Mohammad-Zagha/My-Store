@@ -26,7 +26,7 @@ const Navbar = () => {
          initial="hidden"
          animate={hidden ? 'hidden' : 'visible'}
          transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.2 }}
-         className="  p-3 w-full flex justify-between  bg-background-light    transition-transform fixed top-0 right-0 col-span-full  h-fit   z-[999]"
+         className="  p-3 px-8 w-full flex justify-between  bg-background-light    transition-transform fixed top-0 right-0 col-span-full  h-fit   z-[999]"
          dir="rtl"
       >
          <Link href={'/'} className="flex center font-SFPro text-3xl font-thin">
@@ -34,28 +34,26 @@ const Navbar = () => {
          </Link>
          <div className="flex justify-center items-center gap-8 max-md:hidden">
             <Link
-               href={'/'}
+               href={'/categories'}
                className="bg-transparent hover:bg-transparent border-0 text-primary-dark/70 flex justify-center items-center text-md font-semibold transition-transform duration-200 ease-in-out transform hover:scale-105 focus:outline-none"
             >
-               العروض
+               القوائم
             </Link>
             <Link
-               href={'/'}
+               href={'/aboutus'}
                className="bg-transparent hover:bg-transparent border-0 text-primary-dark/70 flex justify-center items-center text-md font-semibold transition-transform duration-200 ease-in-out transform hover:scale-105 focus:outline-none"
             >
                موقعنا
             </Link>
             <Link
-               href={'/'}
+               href={'/contactus'}
                className="bg-transparent hover:bg-transparent border-0 text-primary-dark/70 flex justify-center items-center text-md font-semibold transition-transform duration-200 ease-in-out transform hover:scale-105 focus:outline-none"
             >
                تواصل معنا
             </Link>
          </div>
          <div className="flex justify-center items-center gap-3">
-            <span>المفضلة</span>
             <Cart />
-            <IoSearchOutline size={24} />
          </div>
       </motion.nav>
    )

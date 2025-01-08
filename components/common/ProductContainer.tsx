@@ -18,7 +18,6 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
    const priceRef = useRef<HTMLDivElement>(null)
    const buttonRef = useRef<HTMLAnchorElement>(null)
    const imageRef = useRef<HTMLImageElement>(null)
-   const addToCartMutation = useAddToCart()
    useEffect(() => {
       const container = containerRef.current
       const price = priceRef.current
@@ -83,14 +82,18 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
          ref={containerRef}
          dir="rtl"
       >
-         <CustomAvatar
-            src={src}
-            className="h-[400px] max-h-[400px] object-cover rounded-xl w-full"
-            fallbackClassName="w-full "
-         />
+         <Link href={`/product/${productid}`} className="w-full h-full">
+            <CustomAvatar
+               src={src}
+               className="h-[400px] max-h-[400px]  bg-white rounded-xl w-full"
+               fallbackClassName="w-full "
+            />
+         </Link>
 
          <div className="grid grid-cols-2 h-full">
-            <span className="text-primary-dark text-center  col-span-full font-500  text-sm text-wrap ">{title}</span>
+            <span className="text-primary-dark text-center  col-span-full   text-sm text-wrap line-clamp-2 font-semibold">
+               {title}
+            </span>
 
             <div ref={priceRef} className="text-primary-dark text-xl flex items-center gap-1 w-fit col-span-full">
                {price}
@@ -100,9 +103,9 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
             <Link
                ref={buttonRef}
                href={`/product/${productid}`}
-               className="text-primary-dark flex justify-start col-span-full  bg-transparent hover:bg-transparent h-fit p-0 text-sm font-semibold opacity-0 transition-opacity"
+               className="text-primary-dark flex justify-start col-span-full font-bold  bg-transparent hover:bg-transparent h-fit p-0 text-sm  opacity-0 transition-opacity"
             >
-               اضافة الى السلة
+               تفاصيل المنتج
             </Link>
          </div>
       </div>
