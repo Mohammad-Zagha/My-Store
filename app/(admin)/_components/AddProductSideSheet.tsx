@@ -1,4 +1,4 @@
-import { AddButton } from '@/components/animated/AddButton'
+import { AddButton, FullAddButton } from '@/components/animated/AddButton'
 import { Carousel } from '@/components/Carousels/CardsCarousel'
 import { Button } from '@/components/chadcn/button'
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/chadcn/sheet'
@@ -109,7 +109,7 @@ export function AddProductSideSheet() {
          </SheetTrigger>
          <SheetContent
             side="right"
-            className="!p-2 !px-4 !pt-5 flex flex-col h-full min-w-[40%] max-sm:min-w-full z-50"
+            className="!p-2 !px-4 !pt-5 flex flex-col h-full min-w-[40%] max-sm:min-w-full z-50 overflow-y-auto"
             dir="rtl"
          >
             <SheetHeader className="flex justify-center items-center text-center  font-semibold">
@@ -215,14 +215,13 @@ export function AddProductSideSheet() {
                      }}
                   />
                </div>
-               <Button
+               <FullAddButton
                   type="button"
-                  className="col-span-full !bg-primary-dark !text-white !text-lg !font-semibold !rounded-lg !py-2.5 !px-4"
                   onClick={() => handleAddProduct({ product: getValues() })}
                   isLoading={addProductMutaion.isPending}
                >
                   حفظ
-               </Button>
+               </FullAddButton>
             </div>
          </SheetContent>
       </Sheet>

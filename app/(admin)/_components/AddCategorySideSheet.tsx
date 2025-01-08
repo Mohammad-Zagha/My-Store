@@ -1,5 +1,5 @@
 'use client'
-import { AddButton } from '@/components/animated/AddButton'
+import { AddButton, FullAddButton } from '@/components/animated/AddButton'
 import { Button } from '@/components/chadcn/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/chadcn/sheet'
 import { DragAndDropImage } from '@/components/ui/DND'
@@ -90,7 +90,9 @@ const AddCategorySideSheet = () => {
                      }}
                   />
                </div>
-               <Button type="submit">اضافة</Button>
+               <FullAddButton type="submit" isLoading={createCategoryMutation.isPending}>
+                  اضافة
+               </FullAddButton>
             </form>
          </SheetContent>
       </Sheet>
