@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/chadcn/button'
 import { InputBox } from '@/components/ui/input'
-import { useAdminLogin } from '@/hooks/api/Auth'
+import { useAdminLogin, useAdminSignup } from '@/hooks/api/Auth'
 import { AdminAuthSchema } from '@/lib/zod/Schemas'
 import { T_Admin_Auth } from '@/types/objects'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,7 +13,7 @@ const AdminLoginForm = () => {
       resolver: zodResolver(AdminAuthSchema),
       mode: 'all',
    })
-   const loginMutaion = useAdminLogin()
+   const loginMutaion = useAdminSignup()
    return (
       <form
          className="flex w-full flex-col gap-6 max-md:gap-4"
