@@ -107,7 +107,7 @@ export const CartPageItem = ({ cartItem }: { cartItem: T_Product & { quantity: n
             <CustomAvatar
                src={(cartItem.images[0]?.url as string) ?? ''}
                alt={cartItem.name}
-               className="size-[80px] rounded-xl "
+               className="size-[80px] rounded-xl max-sm:size-[40px] "
             />
             <div className="flex flex-col justify-between p-1">
                <span className="line-clamp-1  font-semibold text-sm text-primary-dark/85">{cartItem.name}</span>
@@ -130,7 +130,6 @@ export const CartPageItem = ({ cartItem }: { cartItem: T_Product & { quantity: n
             </div>
          </div>
          <div className=" flex flex-col justify-center items-center gap-2">
-            {' '}
             <div className="flex center w-fit gap-4 px-4">
                <Button
                   variant="default"
