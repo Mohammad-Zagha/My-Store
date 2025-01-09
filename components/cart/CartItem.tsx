@@ -26,7 +26,7 @@ export const CartItem = ({ cartItem }: { cartItem: T_Product & { quantity: numbe
    return (
       <div className="w-full shadow-card relative  h-fit flex justify-between gap-6 px-5 py-3 rounded-xl " dir="rtl">
          {cartItem.discount > 0 && (
-            <div className="w-fit h-fit  text-xs bg-red-500 text-white p-1 absolute top-0 left-0 rounded-tl-xl rounded-b-xl">
+            <div className="w-fit h-fit  text-xs bg-primary-dark text-white p-1 absolute top-0 left-0 rounded-tl-xl rounded-b-xl">
                عرض خاص
             </div>
          )}
@@ -36,7 +36,7 @@ export const CartItem = ({ cartItem }: { cartItem: T_Product & { quantity: numbe
             className="size-[80px] rounded-xl "
          />
          <div className="flex flex-col justify-between p-1">
-            <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">{cartItem.name}</span>
+            <span className="line-clamp-1  font-semibold text-sm text-primary-dark/85">{cartItem.name}</span>
             <div className="flex gap-2 justify-start items-center ">
                <span
                   className={cn(
@@ -80,7 +80,7 @@ export const CartItem = ({ cartItem }: { cartItem: T_Product & { quantity: numbe
             <Button
                variant="destructive"
                size={'icon'}
-               className="size-fit"
+               className="size-fit p-2"
                onClick={() => {
                   removeMutation.mutate({ productId: cartItem.productId })
                }}
@@ -110,9 +110,7 @@ export const CartPageItem = ({ cartItem }: { cartItem: T_Product & { quantity: n
                className="size-[80px] rounded-xl "
             />
             <div className="flex flex-col justify-between p-1">
-               <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">
-                  {cartItem.name}
-               </span>
+               <span className="line-clamp-1  font-semibold text-sm text-primary-dark/85">{cartItem.name}</span>
                <span className=" text-xs text-primary-dark/70 max-w-[250px] line-clamp-2">{cartItem.description}</span>
                <div className="flex gap-2 justify-start items-center  ">
                   <span
