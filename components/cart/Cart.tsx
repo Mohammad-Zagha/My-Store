@@ -37,7 +37,7 @@ export function Cart() {
                            ? cart.items
                                 .reduce((acc, item) => acc + (item.price - item.discount) * item.quantity, 0)
                                 .toFixed(1)
-                           : 50000}
+                           : 0}
                      </span>
                   </div>
                )}
