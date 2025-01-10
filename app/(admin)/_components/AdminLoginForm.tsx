@@ -13,7 +13,7 @@ const AdminLoginForm = () => {
       resolver: zodResolver(AdminAuthSchema),
       mode: 'all',
    })
-   const loginMutaion = useAdminSignup()
+   const loginMutaion = useAdminLogin()
    return (
       <form
          className="flex w-full flex-col gap-6 max-md:gap-4"
