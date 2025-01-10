@@ -60,7 +60,7 @@ const BestSellingCarousel = () => {
    return (
       <div ref={containerRef} className="w-full space-y-0.25r mt-[100px]">
          <div className="w-full flex justify-between">
-            <h2 className="text-primary-dark font-SFPro text-xl max-md:text-lg">المنتجات الاكثر مبيعا </h2>
+            <h2 className="text-primary-dark  text-xl max-md:text-lg">المنتجات الاكثر مبيعا </h2>
             <AnimatedLink href="/" title="مشاهدة الكل" />
          </div>
          <Carousel items={cards || []} isLoading={isLoading} />

@@ -105,7 +105,7 @@ const Banner = ({ banner }: { banner: T_Banner }) => {
             <div className="flex flex-col gap-4 max-md:bg-black/15 p-2 rounded-lg max-md:backdrop-blur-sm   ">
                <div className="flex gap-2 font-Inter text-2xl md:text-4xl font-bold pl-2 animate-text">
                   {/* <span className="font-extralight text-xl md:text-3xl ">فيرزاتشي</span>
-                  <span className="font-SFPro">X</span>
+                  <span className="">X</span>
                   <span className="">بيور فيمي</span> */}
                   {banner.arabicName}
                </div>

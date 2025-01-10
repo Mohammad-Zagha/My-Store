@@ -48,17 +48,14 @@ export default function Home() {
          </div>
          <div className="h-full col-span-full  p-6   bg-background-light grid-rows-[auto_minmax(0,1fr)] ">
             <StatsSection />
-            {/* <CatgoryCarousel /> */}
             <NewArrivalsCarousel />
          </div>
 
-         <div className="h-full col-span-full p-6   flex center bg-background-dark ">
+         <div className="h-full col-span-full p-6   flex center bg-background-light ">
             <BestSellingCarousel />
          </div>
-         {/* <div className="h-full col-span-full  flex center bg-background-light ">
-            <BlueChanelDisplay />
-         </div> */}
-         <div className="h-screen col-span-full  p-6 grid grid-cols-12 gap-4 overflow-y-auto  bg-background-dark grid-rows-[auto_minmax(0,1fr)]">
+
+         <div className="h-screen col-span-full  p-6 grid grid-cols-12 gap-4 overflow-y-auto  bg-background-light grid-rows-[auto_minmax(0,1fr)]">
             <TodaysOffers />
          </div>
          <div className="h-screen col-span-full  p-6 grid grid-cols-12 gap-4 overflow-y-auto  bg-background-light grid-rows-[auto_minmax(0,1fr)]">
@@ -69,7 +66,7 @@ export default function Home() {
                src="/perfums/image-5.png"
                title="منتجات متجري النسائية"
                disc="تنيسبنيتلابنيتلابينتلايبنلتابينلتايبنلابينلتبيلنتيبالنتيباليبتنلان"
-               href="/"
+               href="/categories"
             />
          </div>
          <div className="h-full col-span-full  flex flex-col gap-2 p-6   bg-background-light grid-rows-[auto_minmax(0,1fr)]">

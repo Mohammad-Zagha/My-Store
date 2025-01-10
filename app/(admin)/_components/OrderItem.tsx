@@ -15,7 +15,7 @@ const OrderItem = ({ item }: { item: T_Product & { quantity: number } }) => {
                className="size-[80px] rounded-xl "
             />
             <div className="flex flex-col justify-between p-1">
-               <span className="line-clamp-1 font-SFPro font-semibold text-sm text-primary-dark/85">{item.name}</span>
+               <span className="line-clamp-1  font-semibold text-sm text-primary-dark/85">{item.name}</span>
 
                <span className=" text-xs text-primary-dark/70 max-w-[250px] line-clamp-2">{item.description}</span>
                <div className=" text-sm text-primary-dark/70 flex w-fit center gap-2">

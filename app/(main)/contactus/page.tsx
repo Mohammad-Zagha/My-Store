@@ -35,7 +35,7 @@ const ContactPage = () => {
                   ref={contentRef}
                   className="absolute inset-0 flex flex-col gap-6 items-center justify-center p-4 text-center fade-in"
                >
-                  <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl font-SFPro">
+                  <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl ">
                      تواصل معنا
                   </h1>
                   <p className="text-white text-sm  font-medium md:text-lg">

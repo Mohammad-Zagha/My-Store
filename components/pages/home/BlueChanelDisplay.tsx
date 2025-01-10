@@ -79,10 +79,10 @@ const Component = () => {
          className="col-span-1 flex flex-col items-start   justify-start text-start gap-10 max-md:hidden  md:flex "
          ref={textRef}
       >
-         <h1 className="text-6xl md:text-7xl font-bold tracking-wide   font-SFPro text-transparent py-4 bg-background-dark w-full bg-clip-text overflow-visible drop-shadow-lg">
+         <h1 className="text-6xl md:text-7xl font-bold tracking-wide    text-transparent py-4 bg-background-dark w-full bg-clip-text overflow-visible drop-shadow-lg">
             بلو دي شانيل
          </h1>
-         <p className=" break-words leading-1 text-lg   text-white font-bold font-SFPro ">
+         <p className=" break-words leading-1 text-lg   text-white font-bold  ">
             عطر فاخر يتكون من مزيج من الحمضيات والأخشاب النفيسة والعنبر. العطر الذي يمثل الرجل العصري الذي يعيش بأسلوب
             حياة مليء بالتحديات والمغامرات.
          </p>

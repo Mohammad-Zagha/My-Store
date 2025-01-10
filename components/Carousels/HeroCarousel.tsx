@@ -27,7 +27,7 @@ export function CategoriesCarousel() {
       <div className="w-full h-full   overflow-hidden">
          {/* Ensures no overflow */}
          <div className="w-full flex justify-between">
-            <h2 className="text-primary-dark font-SFPro text-xl max-md:text-lg"> تصفح افضل القوائم</h2>
+            <h2 className="text-primary-dark  text-xl max-md:text-lg"> تصفح افضل القوائم</h2>
             <AnimatedLink href="/categories" title="مشاهدة الكل" />
          </div>
 

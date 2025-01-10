@@ -40,7 +40,7 @@ const Page = () => {
                   className="relative flex min-h-[480px] flex-col gap-6 items-center justify-center md:gap-8 p-4"
                >
                   <div className="flex flex-col gap-4 text-center">
-                     <h1 className="fade-in text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl font-SFPro">
+                     <h1 className="fade-in text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl ">
                         قصتنا
                      </h1>
                      <h2 className="fade-in text-white text-sm  leading-normal  font-bold md:text-lg">

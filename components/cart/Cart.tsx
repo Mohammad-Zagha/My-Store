@@ -16,28 +16,50 @@ import { IoCartOutline } from 'react-icons/io5'
 export function Cart() {
    const { data: cart, isLoading } = useGetCart()
    const [open, setOpen] = React.useState(false)
+
+   // Helper function to safely calculate total
+   const calculateTotal = () => {
+      if (!cart || !cart.items.length) return 0
+      return cart.items
+         .reduce((acc, item) => {
+            const price = item.price || 0
+            const discount = item.discount || 0
+            const quantity = item.quantity || 0
+            return acc + (price - discount) * quantity
+         }, 0)
+         .toFixed(2)
+   }
+
    return (
       <Sheet open={open} onOpenChange={setOpen}>
          <SheetTrigger asChild>
             <Button
                variant="default"
-               className="flex center  gap-1 relative size-8 !p-0 bg-transparent hover:bg-transparent text-primary-dark font-bold"
+               className="flex center gap-1 relative size-8 !p-0 bg-transparent hover:bg-transparent text-primary-dark font-bold"
             >
                {isLoading ? (
                   <Skeleton className="w-8 h-2" />
                ) : (
                   <div className="w-fit flex center gap-2 relative">
                      <div className="rounded-full absolute bg-red-500 text-white text-[8px] flex center p-2 size-2 -right-3 -top-1">
-                        {cart && cart.items.length > 0 ? cart.items.length : 0}
+                        {isLoading ? (
+                           <Skeleton className="w-4 h-4" />
+                        ) : cart && cart.items.length > 0 ? (
+                           cart.items.length
+                        ) : (
+                           0
+                        )}
                      </div>
                      <IoCartOutline className="text-xl font-bold" />
                      <span className="text-sm font-semibold">
-                        ₪
-                        {cart && cart.items.length > 0
-                           ? cart.items
-                                .reduce((acc, item) => acc + (item.price - item.discount) * item.quantity, 0)
-                                .toFixed(1)
-                           : 0}
+                        ₪{' '}
+                        {isLoading ? (
+                           <Skeleton className="w-10 h-4 inline-block" />
+                        ) : cart && cart.items.length > 0 ? (
+                           calculateTotal()
+                        ) : (
+                           '0.00'
+                        )}
                      </span>
                   </div>
                )}
@@ -47,16 +69,15 @@ export function Cart() {
          <SheetContent side="left" className="!p-2 !pt-10 flex flex-col h-full min-w-[30%] max-sm:min-w-full">
             <SheetHeader className="flex justify-center items-center text-center">السلة</SheetHeader>
 
-            {/* Scrollable Cart Items Section */}
             {cart && cart.items.length > 0 ? (
                <div className="flex-1 overflow-y-auto flex flex-col px-4 gap-4">
                   <AnimatePresence>
-                     {cart?.items.map((item) => (
+                     {cart.items.map((item) => (
                         <motion.div
                            key={item.productId}
                            initial={{ opacity: 0, y: -20 }}
                            animate={{ opacity: 1, y: 0 }}
-                           exit={{ opacity: 0, y: -50, edgeMode: 'clap' }}
+                           exit={{ opacity: 0, y: -50 }}
                            transition={{ duration: 0.3 }}
                            className="rounded-xl"
                         >
@@ -80,13 +101,11 @@ export function Cart() {
                </div>
             )}
 
-            <div className="bg-transparent h-fit px-8 py-8    " dir="rtl">
-               <div className="flex justify-between items-center px-4 ">
+            <div className="bg-transparent h-fit px-8 py-8" dir="rtl">
+               <div className="flex justify-between items-center px-4">
                   <span className="text-lg font-semibold">المجموع:</span>
                   <span className="text-lg font-semibold">
-                     {cart?.items
-                        .reduce((acc, item) => acc + (item.price - item.discount) * item.quantity, 0)
-                        .toFixed(2)}
+                     ₪ {isLoading ? <Skeleton className="w-16 h-4 inline-block" /> : calculateTotal()}
                   </span>
                </div>
                <Link

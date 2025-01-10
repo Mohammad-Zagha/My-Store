@@ -58,7 +58,7 @@ export const FlipWords = ({
             }}
             className={cn(
                'z-10 inline-block relative text-right text-primary-dark px-2',
-               'font-SFPro rtl', // Added RTL and font support
+               ' rtl', // Added RTL and font support
                className,
             )}
             key={currentWord}

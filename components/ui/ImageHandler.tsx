@@ -62,7 +62,6 @@ const CustomAvatar = ({
       <Avatar ref={avatarRef} className={cn('shrink-0', avatarClassName, className)} onClick={onClick}>
          <AvatarImage
             ref={imageRef}
-            loading="lazy"
             src={src ?? ''}
             alt={alt}
             className={onHover ? 'transition-transform' : ''} // Ensure smooth transitions if hover is enabled

@@ -17,7 +17,8 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
    const containerRef = useRef<HTMLDivElement>(null)
    const priceRef = useRef<HTMLDivElement>(null)
    const buttonRef = useRef<HTMLAnchorElement>(null)
-   const imageRef = useRef<HTMLImageElement>(null)
+   const imageRef = useRef<HTMLDivElement>(null)
+
    useEffect(() => {
       const container = containerRef.current
       const price = priceRef.current
@@ -39,7 +40,7 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
                duration: 0.3,
             },
             0,
-         ) // Apply the image clip and zoom at the same time as the container scale
+         )
          .to(
             price,
             {
@@ -47,7 +48,7 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
                opacity: 0,
                duration: 0.4,
             },
-            '<', // Start price animation at the same time as container and image
+            '<',
          )
          .to(
             button,
@@ -56,15 +57,15 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
                opacity: 1,
                duration: 0.3,
             },
-            '-=0.3', // Start button animation slightly after
+            '-=0.3',
          )
 
       const handleMouseEnter = () => {
-         tl.play() // Play the timeline on hover
+         tl.play()
       }
 
       const handleMouseLeave = () => {
-         tl.reverse() // Reverse the timeline on mouse leave
+         tl.reverse()
       }
 
       container?.addEventListener('mouseenter', handleMouseEnter)
@@ -78,23 +79,22 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
 
    return (
       <div
-         className="flex flex-col justify-between gap-2 drop-shadow-md w-[350px] h-[500px]   p-2"
+         className="flex flex-col justify-between gap-2 drop-shadow-md w-[350px] h-[500px] p-2 relative"
          ref={containerRef}
          dir="rtl"
       >
-         <Link href={`/product/${productid}`} className="w-full h-full">
+         <Link href={`/product/${productid}`} className="relative w-full h-full">
             <CustomAvatar
                src={src}
-               className="h-[400px] max-h-[400px]  bg-white rounded-xl w-full"
+               className="h-[400px] max-h-[400px] bg-white rounded-xl w-full"
                fallbackClassName="w-full "
             />
-         </Link>
-
-         <div className="grid grid-cols-2 h-full">
-            <span className="text-primary-dark text-center  col-span-full   text-sm text-wrap line-clamp-2 font-semibold">
+            {/* Overlay and title */}
+            <div className="absolute bottom-0 left-0 w-full bg-black/30 text-white text-sm font-semibold p-2 h-12 line-clamp-2 rounded-b-xl backdrop-blur-md">
                {title}
-            </span>
-
+            </div>
+         </Link>
+         <div className="grid grid-cols-2 h-full">
             <div ref={priceRef} className="text-primary-dark text-xl flex items-center gap-1 w-fit col-span-full">
                {price}
                <Image src="/icons/ILS.svg" alt="ILS" height={16} width={16} className="h-[16px] w-[16px] mt-1" />
@@ -103,14 +103,12 @@ const ProductContainer = ({ src, title, price, productid }: T_ProductContainer) 
             <Link
                ref={buttonRef}
                href={`/product/${productid}`}
-               className="text-primary-dark flex justify-start col-span-full font-bold  bg-transparent hover:bg-transparent h-fit p-0 text-sm  opacity-0 transition-opacity"
+               className="text-primary-dark flex justify-start col-span-full font-semibold bg-transparent hover:bg-transparent h-fit p-0 text-sm opacity-0 transition-opacity"
             >
                تفاصيل المنتج
             </Link>
          </div>
       </div>
-
-      // <div className="h-[400px] w-full rounded-xl bg-green-500"></div>
    )
 }
 
