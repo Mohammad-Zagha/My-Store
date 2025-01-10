@@ -69,6 +69,19 @@ const Page = () => {
    }
    return (
       <div className="min-w-[dvw] min-h-[100dvh] bg-background-dark pt-20 flex flex-col p-6 gap-8" dir="rtl">
+         {isCategoryLoading ? (
+            <div className="w-full h-dvh flex flex-wrap gap-3" dir="rtl">
+               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+            </div>
+         ) : category?.banner ? (
+            <Banner banner={category?.banner} />
+         ) : null}
          <span className="w-full  text-3xl max-sm:text-lg font-semibold text-primary-dark text-center">
             {category?.name}
          </span>
