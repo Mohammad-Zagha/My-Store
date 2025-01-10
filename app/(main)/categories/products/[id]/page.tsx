@@ -67,21 +67,25 @@ const Page = () => {
       hidden: { opacity: 0 },
       visible: { opacity: 1, transition: { staggerChildren: 0.1 } }, // Stagger children animations
    }
+   if (isCategoryLoading || isLoading)
+      return (
+         <div className="min-w-[dvw] min-h-[100dvh] bg-background-dark pt-20 flex flex-col  gap-8" dir="rtl">
+            <Skeleton />
+         </div>
+      )
    return (
-      <div className="min-w-[dvw] min-h-[100dvh] bg-background-dark pt-20 flex flex-col p-6 gap-8" dir="rtl">
-         {isCategoryLoading ? (
-            <div className="w-full h-dvh flex flex-wrap gap-3" dir="rtl">
-               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
-               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
-               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
-               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
-               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
-               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
-               <Skeleton className="w-full h-[200px] bg-gray-200 rounded-lg" />
+      <div
+         className={cn(
+            'min-w-[dvw] min-h-[100dvh] bg-background-dark pt-14 flex flex-col  gap-8',
+            !category?.banner && 'pt-20',
+         )}
+         dir="rtl"
+      >
+         {category?.banner && (
+            <div className="w-[100dvw] overflow-x-clip h-[100dvh]" dir="ltr">
+               <Banner banner={category?.banner} />
             </div>
-         ) : category?.banner ? (
-            <Banner banner={category?.banner} />
-         ) : null}
+         )}
          <span className="w-full  text-3xl max-sm:text-lg font-semibold text-primary-dark text-center">
             {category?.name}
          </span>
