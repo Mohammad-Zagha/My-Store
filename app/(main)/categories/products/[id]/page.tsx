@@ -76,22 +76,22 @@ const Page = () => {
    return (
       <div
          className={cn(
-            'min-w-[dvw] min-h-[100dvh] bg-background-dark pt-14 flex flex-col  gap-8',
+            'min-w-[dvw] min-h-[100dvh] bg-background-dark pt-14 grid grid-cols-12  gap-8',
             !category?.banner && 'pt-20',
          )}
          dir="rtl"
       >
          {category?.banner && (
-            <div className="w-[100dvw] overflow-x-clip h-[100dvh]" dir="ltr">
+            <div className="col-span-full overflow-x-clip h-[100dvh]" dir="ltr">
                <Banner banner={category?.banner} />
             </div>
          )}
-         <span className="w-full  text-3xl max-sm:text-lg font-semibold text-primary-dark text-center">
+         <span className="col-span-full  text-3xl max-sm:text-lg font-semibold text-primary-dark text-center">
             {category?.name}
          </span>
 
-         <div className="w-full md:w-4/5 min-h-screen h-full flex flex-col gap-4 mt-4 mx-auto">
-            <div className="col-span-full flex justify-between items-center ">
+         <div className="col-span-full min-h-screen  h-full flex flex-col gap-4 mt-4 px-10 mx-auto">
+            <div className="w-full flex justify-between items-center ">
                <Input
                   type="text"
                   placeholder="ابحث عن منتج ..."
