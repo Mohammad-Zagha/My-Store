@@ -109,6 +109,7 @@ export function Cart() {
                   </span>
                </div>
                <Link
+                  onClick={() => setOpen(false)}
                   className={cn(
                      'w-full mt-4 text-white rounded-xl py-4 center bg-primary-dark hover:bg-primary-dark/75',
                   )}
