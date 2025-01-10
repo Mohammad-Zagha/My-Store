@@ -76,7 +76,7 @@ const Page = () => {
    return (
       <div
          className={cn(
-            'min-w-[dvw] min-h-[100dvh] bg-background-dark pt-14 grid grid-cols-12  gap-8',
+            'min-w-[dvw] min-h-[100vh] bg-background-dark pt-14 grid grid-cols-12  gap-8',
             !category?.banner && 'pt-20',
          )}
          dir="rtl"
