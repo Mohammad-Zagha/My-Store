@@ -29,7 +29,7 @@ const Navbar = () => {
          className="  p-3 px-8 w-full flex justify-between  bg-background-light    transition-transform fixed top-0 right-0 col-span-full  h-fit   z-[999]"
          dir="rtl"
       >
-         <Link href={'/'} className="flex center  text-3xl font-thin">
+         <Link href={'/'} className="flex center  text-3xl font-thin font-SFPro">
             متجري
          </Link>
          <div className="flex justify-center items-center gap-8 max-md:hidden">
