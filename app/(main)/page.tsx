@@ -55,17 +55,17 @@ export default function Home() {
             <BestSellingCarousel />
          </div>
 
-         <div className="h-screen col-span-full  p-6 grid grid-cols-12 gap-4 overflow-y-auto  bg-background-light grid-rows-[auto_minmax(0,1fr)]">
+         <div className="min-h-screen col-span-full  p-6 grid grid-cols-12 gap-4   bg-background-light grid-rows-[auto_minmax(0,1fr)]">
             <TodaysOffers />
          </div>
-         <div className="h-screen col-span-full  p-6 grid grid-cols-12 gap-4 overflow-y-auto  bg-background-light grid-rows-[auto_minmax(0,1fr)]">
+         <div className="min-h-screen col-span-full  p-6 grid grid-cols-12 gap-4  bg-background-light grid-rows-[auto_minmax(0,1fr)]">
             <HomeWomanSection />
          </div>
          <div className="h-screen col-span-full p-6  flex center  bg-background-light">
             <CollectionCard
                src="/perfums/image-5.png"
                title="منتجات متجري النسائية"
-               disc="تنيسبنيتلابنيتلابينتلايبنلتابينلتايبنلابينلتبيلنتيبالنتيباليبتنلان"
+               disc="منتجات متجري النسائية منتجات متجري النسائية منتجات متجري النسائية"
                href="/categories"
             />
          </div>
