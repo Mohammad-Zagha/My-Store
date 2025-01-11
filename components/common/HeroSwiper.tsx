@@ -53,7 +53,7 @@ const HeroSwiper = () => {
                         className="object-cover rounded-xl  aspect-video"
                      />
                   </div>
-                  <h1 className="text-5xl md:text-7xl font-extrabold z-10">Welcome to the Future</h1>
+                  <h1 className="text-5xl md:text-7xl font-extrabold z-10 text-center">Welcome to the Future</h1>
                </div>
             </SwiperSlide>
 
@@ -67,7 +67,7 @@ const HeroSwiper = () => {
                         className="object-cover rounded-xl aspect-video"
                      />
                   </div>
-                  <h1 className="text-5xl md:text-7xl font-extrabold z-10">Innovate with Us</h1>
+                  <h1 className="text-5xl md:text-7xl font-extrabold text-center z-10">Innovate with Us</h1>
                </div>
             </SwiperSlide>
 
@@ -81,7 +81,7 @@ const HeroSwiper = () => {
                         className="object-cover rounded-xl aspect-video"
                      />
                   </div>
-                  <h1 className="text-5xl md:text-7xl font-extrabold z-10">Discover the Unknown</h1>
+                  <h1 className="text-5xl md:text-7xl font-extrabold z-10 text-center">Discover the Unknown</h1>
                </div>
             </SwiperSlide>
          </Swiper>
